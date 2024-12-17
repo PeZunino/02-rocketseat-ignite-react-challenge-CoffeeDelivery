@@ -9,12 +9,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body, input, textarea, button{
-    font-family: "Baloo 2", serif;
-    font-optical-sizing: auto;
-    font-weight: bold;
-    font-style: normal;
+    font-family: "Roboto", serif;
+    font-weight: 400;
+    font-style: 1rem;
 
-    /* font-family: "Roboto", serif;
+    /*font-family: "Baloo 2", serif;
     font-weight: 700;
     font-style: normal; */
   }
