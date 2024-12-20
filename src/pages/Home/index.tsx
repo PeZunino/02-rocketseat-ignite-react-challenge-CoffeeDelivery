@@ -1,66 +1,67 @@
-import {
-  ShoppingCart,
-  Timer,
-  Package,
-  Coffee,
-  Minus,
-  Plus,
-} from "@phosphor-icons/react";
-import coffeeIllustration from "../../assets/coffee_illustration.svg";
+import coffeeCupIlustration from "../../assets/coffee_illustration.svg";
 import { coffees } from "../../../data.json";
-import {
-  HeroContainer,
-  HomeContainer,
-  HeroTitle,
-  HeroList,
-  HeroListItem,
-  CoffeeItem,
-  CoffeBuyActions,
-  Tag,
-} from "./styles";
 
 import { useTheme } from "styled-components";
+import {
+  Content,
+  Hero,
+  HeroListItem,
+  HeroList,
+  HeroTitle,
+  CoffeeList,
+  CoffeeListItem,
+  ListItemFotterOptions,
+  ListItemTag,
+} from "./styles";
+import {
+  Coffee,
+  Minus,
+  Package,
+  Plus,
+  ShoppingCart,
+  ShoppingCartSimple,
+  Timer,
+} from "@phosphor-icons/react";
 
 export function Home() {
   const theme = useTheme();
 
   return (
-    <HomeContainer>
-      <HeroContainer>
+    <>
+      <Hero>
         <div>
           <HeroTitle>
-            <h1>
+            <p>
               Encontre o café perfeito <br />
               para qualquer hora do dia
-            </h1>
-            <span>
-              Com o Coffee Delivery você recebe seu café onde estiver, a <br />
+            </p>
+            <p>
+              Com o Coffee Delivery você recebe seu café onde estiver, a
               qualquer hora
-            </span>
+            </p>
           </HeroTitle>
+
           <HeroList>
             <div>
               <HeroListItem>
                 <ShoppingCart
                   weight="fill"
                   color={theme["white-200"]}
-                  style={{ background: theme["yellow-dark"] }}
+                  style={{ background: theme["yellow"] }}
                   size={32}
                 />
-                <span>Compra simples e segura</span>
+                <p>Compra simples e segura</p>
               </HeroListItem>
-
               <HeroListItem>
                 <Timer
                   weight="fill"
                   color={theme["white-200"]}
-                  style={{ background: theme.yellow }}
+                  style={{ background: theme["yellow-dark"] }}
                   size={32}
                 />
-                <span>Entrega rápida e rastreada</span>
+                <p>Entregua rápida e rastreada</p>
               </HeroListItem>
             </div>
-
             <div>
               <HeroListItem>
                 <Package
@@ -69,74 +70,72 @@ export function Home() {
                   style={{ background: theme["gray-300"] }}
                   size={32}
                 />
-                <span>Embalagem mantem o café intacto</span>
+                <p>Embalagem mantem o café intacto</p>
               </HeroListItem>
-
               <HeroListItem>
                 <Coffee
                   weight="fill"
                   color={theme["white-200"]}
-                  style={{ background: theme.purple }}
+                  style={{ background: theme["purple"] }}
                   size={32}
                 />
-                <span>Seu café chega fresquinho até você</span>
+                <p>Seu café chega fresquinho até você</p>
               </HeroListItem>
             </div>
           </HeroList>
         </div>
         <img
-          src={coffeeIllustration}
+          src={coffeeCupIlustration}
           alt="copo de café do coffee delivery com fundo amarelo e grãos"
         />
-      </HeroContainer>
-
-      <main>
+      </Hero>
+      <Content>
         <p>Nossos cafés</p>
 
-        <div>
-          {coffees.map((coffee) => (
-            <CoffeeItem>
-              <img
-                src={coffee.image}
-                alt="xicara de café expresso tradicional"
-              />
-              <div>
-                {coffee.tags.map((tag) => (
-                  <Tag>{tag.toUpperCase()}</Tag>
-                ))}
-              </div>
-              <p>{coffee.title}</p>
-              <span>{coffee.description}</span>
+        <CoffeeList>
+          <CoffeeList>
+            {coffees.map((coffee) => (
+              <CoffeeListItem>
+                <img src={coffee.image} />
+                <ListItemTag>
+                  {coffee.tags.map((tag) => (
+                    <p>{tag}</p>
+                  ))}
+                </ListItemTag>
 
-              <CoffeBuyActions>
-                <p>
-                  R${" "}
-                  <span>
+                <p>{coffee.title}</p>
+                <p>{coffee.description}</p>
+
+                <ListItemFotterOptions>
+                  <p>
+                    <span>R$ </span>
                     {String(coffee.price).padEnd(4, "0").replace(".", ",")}
-                  </span>
-                </p>
+                  </p>
 
-                <div>
-                  <button>
-                    <Minus color={theme["purple-dark"]} size={32} />
-                  </button>
-                  <span>1</span>
-                  <button>
-                    <Plus color={theme["purple-dark"]} size={32} />
-                  </button>
-                </div>
+                  <div>
+                    <button>
+                      <Minus size={32} color={theme["purple"]} />
+                    </button>
+                    <span>1</span>
+                    <button>
+                      <Plus size={32} color={theme["purple"]} />
+                    </button>
+                  </div>
 
-                <ShoppingCart
-                  weight="fill"
-                  color={theme["white-200"]}
-                  style={{ background: theme["purple-dark"] }}
-                  size={36}
-                />
-              </CoffeBuyActions>
-            </CoffeeItem>
-          ))}
-        </div>
-      </main>
-    </HomeContainer>
+                  <button>
+                    <ShoppingCartSimple
+                      weight="fill"
+                      color={theme["white-200"]}
+                      style={{ background: theme["purple"] }}
+                      size={32}
+                    />
+                  </button>
+                </ListItemFotterOptions>
+              </CoffeeListItem>
+            ))}
+          </CoffeeList>
+        </CoffeeList>
+      </Content>
+    </>
   );
 }
