@@ -8,13 +8,15 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  button{
+    border :0;
+    background: transparent;
+  }
   body, input, textarea, button{
     font-family: "Roboto", serif;
     font-weight: 400;
     font-size: 1rem;
-    /* font-family:     font-family: "Baloo 2", serif;
-    font-weight: 700;
-    font-style: normal; */
+  
   }
 
   :focus{
