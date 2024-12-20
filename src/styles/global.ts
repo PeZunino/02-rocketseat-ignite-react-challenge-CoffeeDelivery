@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   button{
     border :0;
     background: transparent;
+    cursor: pointer;
   }
   body, input, textarea, button{
     font-family: "Roboto", serif;
