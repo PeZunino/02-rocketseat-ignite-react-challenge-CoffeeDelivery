@@ -3,7 +3,7 @@ import { Header } from "../components/Header";
 
 export function DefaultLayout() {
   return (
-    <div style={{ padding: "0rem 10rem" }}>
+    <div>
       <Header />
       <Outlet></Outlet>
     </div>
