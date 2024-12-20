@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-  min-width: 47.5rem;
-  height: 6.5rem;
-  padding: 2rem 10rem;
+  width: 70rem; /* Impede que o header seja menor que a tela */
 
+  margin: 0 auto;
+
+  height: 6.5rem;
+  padding: 2rem 0rem;
   display: flex;
   justify-content: space-between;
 

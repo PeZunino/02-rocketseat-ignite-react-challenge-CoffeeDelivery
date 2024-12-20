@@ -11,9 +11,8 @@ export const GlobalStyle = createGlobalStyle`
   body, input, textarea, button{
     font-family: "Roboto", serif;
     font-weight: 400;
-    font-style: 1rem;
-
-    /*font-family: "Baloo 2", serif;
+    font-size: 1rem;
+    /* font-family:     font-family: "Baloo 2", serif;
     font-weight: 700;
     font-style: normal; */
   }
@@ -21,4 +20,6 @@ export const GlobalStyle = createGlobalStyle`
   :focus{
     outline:0;
   }
+
+
 `;
