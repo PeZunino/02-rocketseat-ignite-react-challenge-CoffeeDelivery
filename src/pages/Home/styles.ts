@@ -34,6 +34,10 @@ export const HeroContainer = styled.div`
 
   display: flex;
   gap: 3.5rem;
+
+  img {
+    flex: 1;
+  }
 `;
 export const HeroTitle = styled.div`
   height: 12rem;
