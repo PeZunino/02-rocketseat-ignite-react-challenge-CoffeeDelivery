@@ -1,74 +1,88 @@
 import {
+  MapPinLine,
+  CurrencyDollar,
   Bank,
   CreditCard,
-  CurrencyDollar,
-  MapPinLine,
   Money,
 } from "@phosphor-icons/react";
-import {
-  ContentContainer,
-  CompleteOrderContainer,
-  OrderDetailsContainer,
-  OrderAddressContainer,
-  OrderAddressTitle,
-  OrderPaymentTypeContainer,
-  OrderPaymentTypeTitle,
-  PaymentType,
-} from "./styles";
+import { Content, Title, AddressContainer, ContainerHeader } from "./styles";
 import { useTheme } from "styled-components";
-import { Input } from "../../components/Input";
 
 export function Checkout() {
   const theme = useTheme();
   return (
-    <ContentContainer>
-      <CompleteOrderContainer>
-        <p>Complete seu pedido</p>
+    <Content>
+      <section>
+        <Title>Complete seu pedido</Title>
 
-        <OrderAddressContainer>
-          <OrderAddressTitle>
+        <AddressContainer>
+          <ContainerHeader>
             <MapPinLine size={22} color={theme["yellow-dark"]} />
 
             <div>
               <p>Endereço de Entrega</p>
               <span>Informe o endereço onde deseja receber seu pedido</span>
             </div>
-          </OrderAddressTitle>
+          </ContainerHeader>
 
           <form action="">
-            <Input id="code" placeholder="CEP" />
-            <Input id="street" width={"100%"} placeholder="Rua" />
-            <div>
-              <Input id="number" placeholder="Número" />
+            <input id="code" aria-label="code" type="text" placeholder="CEP" />
+            <input
+              id="street"
+              aria-label="street"
+              type="text"
+              placeholder="Rua"
+            />
 
-              <Input
+            <div>
+              <input
+                id="number"
+                aria-label="number"
+                type="text"
+                placeholder="Número"
+              />
+              <input
                 id="complement"
-                width={"100%"}
+                aria-label="complement"
+                type="text"
                 placeholder="Complemento"
-                informativeText="Opcional"
               />
             </div>
+
             <div>
-              <Input id="neighborhood" placeholder="Bairro" />
-              <Input id="city" width={"10.25rem"} placeholder="Cidade" />
-              <Input id="state" width={"3.75rem"} placeholder="UF" />
+              <input
+                id="neighborhood"
+                aria-label="neighborhood"
+                type="text"
+                placeholder="Bairro"
+              />
+              <input
+                id="city"
+                aria-label="city"
+                type="text"
+                placeholder="Cidade"
+              />
+              <input
+                id="state"
+                aria-label="state"
+                type="text"
+                placeholder="UF"
+              />
             </div>
           </form>
-        </OrderAddressContainer>
+        </AddressContainer>
 
-        <OrderPaymentTypeContainer>
-          <OrderPaymentTypeTitle>
+        <footer>
+          <ContainerHeader>
             <CurrencyDollar size={22} color={theme["purple"]} />
-
             <div>
               <p>Pagamento</p>
               <span>
                 O pagamento é feito na entrega escolha a forma de pagar
               </span>
             </div>
-          </OrderPaymentTypeTitle>
-
-          <PaymentType>
+          </ContainerHeader>
+          <div>
             <button>
               <CreditCard size={16} color={theme.purple} />
               CARTÃO DE CRÉDITO
@@ -81,14 +95,13 @@ export function Checkout() {
               <Money size={16} color={theme.purple} />
               DINHEIRO
             </button>
-          </PaymentType>
-        </OrderPaymentTypeContainer>
-      </CompleteOrderContainer>
+          </div>
+        </footer>
+      </section>
 
-      <OrderDetailsContainer>
-        <p>Cafés selecionados</p>
-        <div></div>
-      </OrderDetailsContainer>
-    </ContentContainer>
+      <aside>
+        <Title>Cafés selecionados</Title>
+      </aside>
+    </Content>
   );
 }
