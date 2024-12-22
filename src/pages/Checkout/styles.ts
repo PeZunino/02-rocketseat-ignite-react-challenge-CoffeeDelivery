@@ -42,6 +42,48 @@ export const Content = styled.main`
 
   aside {
     flex: 1;
+
+    > div {
+      padding: 2.5rem;
+
+      border-radius: 6px 44px;
+      background-color: ${(props) => props.theme["white-300"]};
+    }
+
+    > div > p {
+      display: flex;
+      justify-content: space-between;
+    }
+    > div > p:not(:last-of-type) {
+      margin-bottom: 0.875rem;
+
+      color: ${(props) => props.theme["gray-300"]};
+
+      font-size: 0.875rem;
+
+      span {
+        font-size: 1rem;
+      }
+    }
+
+    > div > p:last-of-type {
+      margin-bottom: 1.5rem;
+
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+
+    > div > button {
+      width: 100%;
+      padding: 0.75rem 0rem;
+
+      border-radius: 6px;
+      color: ${(props) => props.theme["white-100"]};
+      background-color: ${(props) => props.theme.yellow};
+
+      font-weight: bold;
+      font-size: 0.875rem;
+    }
   }
 `;
 
@@ -85,7 +127,6 @@ export const AddressContainer = styled.div`
     background: ${(props) => props.theme["white-400"]};
   }
 `;
-
 export const Title = styled.p`
   margin-bottom: 1rem;
 
@@ -107,5 +148,68 @@ export const ContainerHeader = styled.header`
     color: ${(props) => props.theme["gray-300"]};
 
     font-size: 0.875rem;
+  }
+`;
+
+export const Item = styled.div`
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+
+  border-bottom: 1px solid ${(props) => props.theme["white-500"]};
+
+  img {
+    width: 64px;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+
+    color: ${(props) => props.theme["gray-300"]};
+    font-weight: bold;
+  }
+`;
+
+export const ItemOptions = styled.div`
+  padding-left: 1.25rem;
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  > div {
+    display: flex;
+    gap: 0.5rem;
+  }
+  div > div {
+    width: 4.5rem;
+    height: 2rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    border-radius: 6px;
+    background: ${(props) => props.theme["white-500"]};
+  }
+
+  button {
+    line-height: 0;
+  }
+
+  > div > button {
+    padding: 0rem 0.5rem;
+    display: inline-flex;
+    align-items: center;
+
+    border-radius: 6px;
+    color: ${(props) => props.theme["gray-300"]};
+    background-color: ${(props) => props.theme["white-500"]};
+
+    font-size: 0.75rem;
+
+    svg {
+      margin-right: 0.25rem;
+    }
   }
 `;

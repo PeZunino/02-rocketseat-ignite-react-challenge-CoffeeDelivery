@@ -4,8 +4,21 @@ import {
   Bank,
   CreditCard,
   Money,
+  Minus,
+  Plus,
+  Trash,
 } from "@phosphor-icons/react";
-import { Content, Title, AddressContainer, ContainerHeader } from "./styles";
+import {
+  Content,
+  Title,
+  AddressContainer,
+  ContainerHeader,
+  Item,
+  ItemOptions,
+} from "./styles";
+import expresso from "../../assets/coffees/expresso.svg";
+import latte from "../../assets/coffees/latte.svg";
+
 import { useTheme } from "styled-components";
 
 export function Checkout() {
@@ -101,6 +114,71 @@ export function Checkout() {
 
       <aside>
         <Title>Cafés selecionados</Title>
+        <div>
+          <Item>
+            <img src={expresso} />
+
+            <ItemOptions>
+              <p>Expresso Tradicional</p>
+
+              <div>
+                <div>
+                  <button>
+                    <Minus size={14} color={theme["purple"]} />
+                  </button>
+                  <span>1</span>
+                  <button>
+                    <Plus size={14} color={theme["purple"]} />
+                  </button>
+                </div>
+
+                <button>
+                  <Trash size={14} color={theme["purple"]} />
+                  RETIRAR
+                </button>
+              </div>
+            </ItemOptions>
+
+            <p>R$ 9,90</p>
+          </Item>
+          <Item>
+            <img src={latte} />
+
+            <ItemOptions>
+              <p>Latte</p>
+
+              <div>
+                <div>
+                  <button>
+                    <Minus size={14} color={theme["purple"]} />
+                  </button>
+                  <span>1</span>
+                  <button>
+                    <Plus size={14} color={theme["purple"]} />
+                  </button>
+                </div>
+
+                <button>
+                  <Trash size={14} color={theme["purple"]} />
+                  RETIRAR
+                </button>
+              </div>
+            </ItemOptions>
+
+            <p>R$ 9,90</p>
+          </Item>
+          <p>
+            Total de itens <span>R$ 19,80</span>
+          </p>
+          <p>
+            Entrega <span>R$ 3,50</span>
+          </p>
+          <p>
+            Total <span>R$ 23,30</span>
+          </p>
+
+          <button>CONFIRMAR PEDIDO</button>
+        </div>
       </aside>
     </Content>
   );
