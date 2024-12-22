@@ -1,50 +1,48 @@
-# React + TypeScript + Vite
+# Coffee Delivery - Challenge 02 ReactJS
+![Work in Progress](https://img.shields.io/badge/Status-Work_in_Progress-yellow)  ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)  ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)  ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)  ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🔜 On Progress
+This project is currently in development, and new features and improvements are being added regularly. 
 
-Currently, two official plugins are available:
+## 📜 Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project is a fictional e-commerce web page for purchasing coffee, developed with ReactJS, TypeScript, and styled-components. The application showcases various types of coffee and offers a simple and modern user interface.
 
-## Expanding the ESLint configuration
+## 💻 Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React**: A JavaScript library for building user interfaces.
+- **TypeScript**: A superset of JavaScript that adds static types.
+- **Styled-Components**: For styling components with CSS-in-JS.
+- **Vite**: A fast build tool for modern web projects.
 
-- Configure the top-level `parserOptions` property like this:
+## 🛠️ Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Prerequisites
+- **Node.js (version 16 or above)**
+- **npm (Node.js package manager)**
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/PeZunino/CoffeeDelivery.git
+2. Navigate into the project directory:
+   ```bash
+   cd CoffeeDelivery
+3. Install dependencies:
+   ```bash
+   npm install
+4. Run the development server:
+   ```bash
+   npm run dev
+5. Open your browser and visit:
+   ```bash
+   http://localhost:5173/
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🤝 Contributing
+If you'd like to contribute to this project, follow these steps:
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Fork this repository.
+2. Create a branch for your changes.
+3. Make your changes and submit a pull request.
+
+## 📄 License
+This project is open source and available under the MIT License.
