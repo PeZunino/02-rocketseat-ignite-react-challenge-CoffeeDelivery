@@ -8,10 +8,12 @@ export function Header() {
   const theme = useTheme();
   return (
     <HeaderContainer>
-      <img
-        src={imgLogo}
-        alt="copo termico de café com logo da Rocketseat e título ao lado escrito Coffee Delivery"
-      />
+      <NavLink to={"/"}>
+        <img
+          src={imgLogo}
+          alt="copo termico de café com logo da Rocketseat e título ao lado escrito Coffee Delivery"
+        />
+      </NavLink>
       <NavBar>
         <div>
           <MapPin size={22} weight="fill" color={theme.purple} />
