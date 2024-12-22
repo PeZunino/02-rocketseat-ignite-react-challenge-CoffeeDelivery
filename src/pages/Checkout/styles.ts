@@ -73,10 +73,14 @@ export const Content = styled.main`
       font-weight: bold;
     }
 
-    > div > button {
+    > div > a {
       width: 100%;
       padding: 0.75rem 0rem;
 
+      display: block;
+
+      text-align: center;
+      text-decoration: none;
       border-radius: 6px;
       color: ${(props) => props.theme["white-100"]};
       background-color: ${(props) => props.theme.yellow};

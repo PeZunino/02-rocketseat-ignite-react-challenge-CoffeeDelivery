@@ -20,6 +20,7 @@ import expresso from "../../assets/coffees/expresso.svg";
 import latte from "../../assets/coffees/latte.svg";
 
 import { useTheme } from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export function Checkout() {
   const theme = useTheme();
@@ -177,7 +178,7 @@ export function Checkout() {
             Total <span>R$ 23,30</span>
           </p>
 
-          <button>CONFIRMAR PEDIDO</button>
+          <NavLink to={"/success"}>CONFIRMAR PEDIDO</NavLink>
         </div>
       </aside>
     </Content>
