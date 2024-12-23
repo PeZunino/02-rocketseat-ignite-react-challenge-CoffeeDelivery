@@ -109,7 +109,7 @@ export const CoffeeListItem = styled.div`
     transform: translateY(-20px);
   }
 
-  p:nth-child(3) {
+  > p:nth-child(3) {
     color: ${(props) => props.theme["gray-500"]};
 
     font-family: "Baloo 2", serif;
