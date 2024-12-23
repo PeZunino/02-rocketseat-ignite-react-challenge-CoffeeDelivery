@@ -1,5 +1,4 @@
 import coffeeCupIlustration from "../../assets/coffee_illustration.svg";
-import { coffees } from "../../../data.json";
 
 import { useTheme } from "styled-components";
 import {
@@ -22,59 +21,18 @@ import {
   ShoppingCartSimple,
   Timer,
 } from "@phosphor-icons/react";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { OrderContext } from "../../context/OrderContext";
 
-export type ICoffee = (typeof coffees)[0];
-
 export function Home() {
-  const { setOrder } = useContext(OrderContext);
-
-  const [menuList, setMenuList] = useState(coffees);
+  const {
+    handleAddToCart,
+    handleDecrementCoffeeAmount,
+    handleIncrementCoffeeAmount,
+    preOrder,
+  } = useContext(OrderContext);
 
   const theme = useTheme();
-
-  function handleAddCoffeeToPurchase(coffeeId: string) {
-    const newCoffee = coffees.find((coffee) => coffee.id == coffeeId);
-
-    if (!newCoffee) return;
-
-    setMenuList((state) => [...state, newCoffee]);
-  }
-
-  function handleRemoveCoffeeFromPurchaseList(coffeeId: string) {
-    if (countAmountOfCoffeeType(coffeeId) == 1) return;
-
-    const coffeeTypeIndex = menuList.findIndex(
-      (coffee) => coffee.id == coffeeId
-    );
-
-    setMenuList([
-      ...menuList.slice(0, coffeeTypeIndex),
-      ...menuList.slice(coffeeTypeIndex + 1),
-    ]);
-  }
-
-  function handleAddToOrderList(confirmedCoffee: ICoffee) {
-    //[1,2,3,4,5,6,7,8,9,10,2,2,3]
-    //confirmedCoffee = 2
-
-    const confirmedItems: ICoffee[] = [];
-
-    const filteredList = menuList.filter((item) => {
-      if (item != confirmedCoffee) return item;
-
-      setOrder([item]);
-
-      if (confirmedItems.indexOf(item) == -1) confirmedItems.push(item);
-    });
-
-    setMenuList([...filteredList, ...confirmedItems]);
-  }
-
-  function countAmountOfCoffeeType(coffeeId: string) {
-    return menuList.filter((item) => item.id == coffeeId).length;
-  }
 
   return (
     <>
@@ -144,7 +102,7 @@ export function Home() {
 
         <CoffeeList>
           <CoffeeList>
-            {coffees.map((coffee) => (
+            {preOrder.map(({ coffee }) => (
               <CoffeeListItem key={coffee.id}>
                 <img src={coffee.image} />
                 <ListItemTag>
@@ -167,22 +125,25 @@ export function Home() {
                       <Minus
                         size={32}
                         color={theme["purple"]}
-                        onClick={() =>
-                          handleRemoveCoffeeFromPurchaseList(coffee.id)
-                        }
+                        onClick={() => handleDecrementCoffeeAmount(coffee.id)}
                       />
                     </button>
-                    <span>{countAmountOfCoffeeType(coffee.id)}</span>
+                    <span>
+                      {
+                        preOrder.find((item) => item.coffee.id == coffee.id)
+                          ?.amount
+                      }
+                    </span>
                     <button>
                       <Plus
                         size={32}
                         color={theme["purple"]}
-                        onClick={() => handleAddCoffeeToPurchase(coffee.id)}
+                        onClick={() => handleIncrementCoffeeAmount(coffee.id)}
                       />
                     </button>
                   </div>
 
-                  <button onClick={() => handleAddToOrderList(coffee)}>
+                  <button onClick={() => handleAddToCart(coffee.id)}>
                     <ShoppingCartSimple
                       weight="fill"
                       color={theme["white-200"]}

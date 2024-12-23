@@ -7,7 +7,7 @@ import { useContext } from "react";
 import { OrderContext } from "../../context/OrderContext";
 
 export function Header() {
-  const { order } = useContext(OrderContext);
+  const { cartItems } = useContext(OrderContext);
   const theme = useTheme();
 
   return (
@@ -32,7 +32,7 @@ export function Header() {
               color={theme["yellow-dark"]}
             />
           </NavLink>
-          <ItemsCount>{order.length}</ItemsCount>
+          <ItemsCount>{cartItems.length}</ItemsCount>
         </div>
       </NavBar>
     </HeaderContainer>
