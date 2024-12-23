@@ -22,10 +22,14 @@ import {
   ShoppingCartSimple,
   Timer,
 } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { OrderContext } from "../../context/OrderContext";
+
+export type ICoffee = (typeof coffees)[0];
 
 export function Home() {
-  // const [orderList, setOrderList] = useState<typeof coffees>([]);
+  const { setOrder } = useContext(OrderContext);
+
   const [menuList, setMenuList] = useState(coffees);
 
   const theme = useTheme();
@@ -49,6 +53,23 @@ export function Home() {
       ...menuList.slice(0, coffeeTypeIndex),
       ...menuList.slice(coffeeTypeIndex + 1),
     ]);
+  }
+
+  function handleAddToOrderList(confirmedCoffee: ICoffee) {
+    //[1,2,3,4,5,6,7,8,9,10,2,2,3]
+    //confirmedCoffee = 2
+
+    const confirmedItems: ICoffee[] = [];
+
+    const filteredList = menuList.filter((item) => {
+      if (item != confirmedCoffee) return item;
+
+      setOrder([item]);
+
+      if (confirmedItems.indexOf(item) == -1) confirmedItems.push(item);
+    });
+
+    setMenuList([...filteredList, ...confirmedItems]);
   }
 
   function countAmountOfCoffeeType(coffeeId: string) {
@@ -161,7 +182,7 @@ export function Home() {
                     </button>
                   </div>
 
-                  <button>
+                  <button onClick={() => handleAddToOrderList(coffee)}>
                     <ShoppingCartSimple
                       weight="fill"
                       color={theme["white-200"]}

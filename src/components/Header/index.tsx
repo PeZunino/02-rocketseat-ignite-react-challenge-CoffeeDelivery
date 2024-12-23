@@ -1,11 +1,15 @@
 import { NavLink } from "react-router-dom";
 import imgLogo from "../../assets/logo.svg";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
-import { HeaderContainer, NavBar } from "./styles";
+import { HeaderContainer, ItemsCount, NavBar } from "./styles";
 import { useTheme } from "styled-components";
+import { useContext } from "react";
+import { OrderContext } from "../../context/OrderContext";
 
 export function Header() {
+  const { order } = useContext(OrderContext);
   const theme = useTheme();
+
   return (
     <HeaderContainer>
       <NavLink to={"/"}>
@@ -20,9 +24,16 @@ export function Header() {
           Porto Alegre, RS
         </div>
 
-        <NavLink to={"/checkout"}>
-          <ShoppingCart size={22} weight="fill" color={theme["yellow-dark"]} />
-        </NavLink>
+        <div>
+          <NavLink to={"/checkout"}>
+            <ShoppingCart
+              size={22}
+              weight="fill"
+              color={theme["yellow-dark"]}
+            />
+          </NavLink>
+          <ItemsCount>{order.length}</ItemsCount>
+        </div>
       </NavBar>
     </HeaderContainer>
   );
