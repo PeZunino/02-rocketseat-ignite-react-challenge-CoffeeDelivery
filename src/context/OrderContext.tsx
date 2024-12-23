@@ -6,8 +6,7 @@ interface OrderContextProps {
   preOrder: CoffeeOrder[];
   handleIncrementCoffeeAmount: (id: string) => void;
   handleDecrementCoffeeAmount: (id: string) => void;
-  handleAddToCart: (id: string) => void;
-  setItemsInCart: (order: CoffeeOrder) => void;
+  handleAddToCart: (coffee: ICoffee, amount: number) => void;
 }
 
 type ICoffee = (typeof coffees)[0];
@@ -51,14 +50,31 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
     setPreOrder(updatedOrderList);
   }
 
-  function handleAddToCart(id: string) {
-    preOrder.map((item) => {
-      if (item.coffee.id == id) {
-        setItemsInCart(item);
-      }
-    });
+  function handleAddToCart(coffee: ICoffee, amount: number) {
+    //ver se tem na sacola
+    //se tiver somar
+    //se nao tiver adicionar
+
+    const hasInCart = cartItems.find((item) => item.coffee == coffee);
+
+    if (hasInCart) {
+      const updatedCartItems = cartItems.map((item) => {
+        if (item.coffee == coffee) {
+          return {
+            amount: item.amount + amount,
+            coffee,
+          } as CoffeeOrder;
+        }
+        return item;
+      });
+
+      setCartItems(updatedCartItems);
+    } else {
+      setCartItems((state) => [...state, { amount, coffee }]);
+    }
+
     const updatedOrderList = preOrder.map((item) => {
-      if (item.coffee.id == id && item.amount > 1) {
+      if (item.coffee.id == coffee.id && item.amount > 1) {
         return {
           coffee: item.coffee,
           amount: 1,
@@ -66,11 +82,8 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
       }
       return item;
     });
-    setPreOrder(updatedOrderList);
-  }
 
-  function setItemsInCart(order: CoffeeOrder) {
-    setCartItems((state) => [...state, order]);
+    setPreOrder(updatedOrderList);
   }
 
   useEffect(() => {
@@ -87,7 +100,6 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
         handleAddToCart,
         handleDecrementCoffeeAmount,
         handleIncrementCoffeeAmount,
-        setItemsInCart,
         preOrder,
       }}
     >

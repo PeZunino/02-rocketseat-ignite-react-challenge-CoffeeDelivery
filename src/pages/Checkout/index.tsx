@@ -16,14 +16,16 @@ import {
   Item,
   ItemOptions,
 } from "./styles";
-import expresso from "../../assets/coffees/expresso.svg";
-import latte from "../../assets/coffees/latte.svg";
 
 import { useTheme } from "styled-components";
 import { NavLink } from "react-router-dom";
+import { OrderContext } from "../../context/OrderContext";
+import { useContext } from "react";
 
 export function Checkout() {
+  const { cartItems } = useContext(OrderContext);
   const theme = useTheme();
+
   return (
     <Content>
       <section>
@@ -116,58 +118,38 @@ export function Checkout() {
       <aside>
         <Title>Cafés selecionados</Title>
         <div>
-          <Item>
-            <img src={expresso} />
+          {cartItems.map(({ amount, coffee }) => (
+            <Item key={coffee.id}>
+              <img src={coffee.image} />
 
-            <ItemOptions>
-              <p>Expresso Tradicional</p>
+              <ItemOptions>
+                <p>{coffee.title}</p>
 
-              <div>
                 <div>
+                  <div>
+                    <button>
+                      <Minus size={14} color={theme["purple"]} />
+                    </button>
+                    <span>{amount}</span>
+                    <button>
+                      <Plus size={14} color={theme["purple"]} />
+                    </button>
+                  </div>
+
                   <button>
-                    <Minus size={14} color={theme["purple"]} />
-                  </button>
-                  <span>1</span>
-                  <button>
-                    <Plus size={14} color={theme["purple"]} />
+                    <Trash size={14} color={theme["purple"]} />
+                    RETIRAR
                   </button>
                 </div>
+              </ItemOptions>
 
-                <button>
-                  <Trash size={14} color={theme["purple"]} />
-                  RETIRAR
-                </button>
-              </div>
-            </ItemOptions>
+              <p>
+                <span>R$ </span>
+                {String(coffee.price).padEnd(4, "0").replace(".", ",")}
+              </p>
+            </Item>
+          ))}
 
-            <p>R$ 9,90</p>
-          </Item>
-          <Item>
-            <img src={latte} />
-
-            <ItemOptions>
-              <p>Latte</p>
-
-              <div>
-                <div>
-                  <button>
-                    <Minus size={14} color={theme["purple"]} />
-                  </button>
-                  <span>1</span>
-                  <button>
-                    <Plus size={14} color={theme["purple"]} />
-                  </button>
-                </div>
-
-                <button>
-                  <Trash size={14} color={theme["purple"]} />
-                  RETIRAR
-                </button>
-              </div>
-            </ItemOptions>
-
-            <p>R$ 9,90</p>
-          </Item>
           <p>
             Total de itens <span>R$ 19,80</span>
           </p>

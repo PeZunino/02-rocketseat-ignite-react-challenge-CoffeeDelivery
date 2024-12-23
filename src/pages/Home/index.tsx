@@ -102,7 +102,7 @@ export function Home() {
 
         <CoffeeList>
           <CoffeeList>
-            {preOrder.map(({ coffee }) => (
+            {preOrder.map(({ coffee, amount }) => (
               <CoffeeListItem key={coffee.id}>
                 <img src={coffee.image} />
                 <ListItemTag>
@@ -143,7 +143,7 @@ export function Home() {
                     </button>
                   </div>
 
-                  <button onClick={() => handleAddToCart(coffee.id)}>
+                  <button onClick={() => handleAddToCart(coffee, amount)}>
                     <ShoppingCartSimple
                       weight="fill"
                       color={theme["white-200"]}
