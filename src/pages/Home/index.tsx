@@ -22,9 +22,38 @@ import {
   ShoppingCartSimple,
   Timer,
 } from "@phosphor-icons/react";
+import { useState } from "react";
 
 export function Home() {
+  // const [orderList, setOrderList] = useState<typeof coffees>([]);
+  const [menuList, setMenuList] = useState(coffees);
+
   const theme = useTheme();
+
+  function handleAddCoffeeToPurchase(coffeeId: string) {
+    const newCoffee = coffees.find((coffee) => coffee.id == coffeeId);
+
+    if (!newCoffee) return;
+
+    setMenuList((state) => [...state, newCoffee]);
+  }
+
+  function handleRemoveCoffeeFromPurchaseList(coffeeId: string) {
+    if (countAmountOfCoffeeType(coffeeId) == 1) return;
+
+    const coffeeTypeIndex = menuList.findIndex(
+      (coffee) => coffee.id == coffeeId
+    );
+
+    setMenuList([
+      ...menuList.slice(0, coffeeTypeIndex),
+      ...menuList.slice(coffeeTypeIndex + 1),
+    ]);
+  }
+
+  function countAmountOfCoffeeType(coffeeId: string) {
+    return menuList.filter((item) => item.id == coffeeId).length;
+  }
 
   return (
     <>
@@ -95,11 +124,11 @@ export function Home() {
         <CoffeeList>
           <CoffeeList>
             {coffees.map((coffee) => (
-              <CoffeeListItem>
+              <CoffeeListItem key={coffee.id}>
                 <img src={coffee.image} />
                 <ListItemTag>
-                  {coffee.tags.map((tag) => (
-                    <p>{tag}</p>
+                  {coffee.tags.map((tag, index) => (
+                    <p key={index}>{tag}</p>
                   ))}
                 </ListItemTag>
 
@@ -114,11 +143,21 @@ export function Home() {
 
                   <div>
                     <button>
-                      <Minus size={32} color={theme["purple"]} />
+                      <Minus
+                        size={32}
+                        color={theme["purple"]}
+                        onClick={() =>
+                          handleRemoveCoffeeFromPurchaseList(coffee.id)
+                        }
+                      />
                     </button>
-                    <span>1</span>
+                    <span>{countAmountOfCoffeeType(coffee.id)}</span>
                     <button>
-                      <Plus size={32} color={theme["purple"]} />
+                      <Plus
+                        size={32}
+                        color={theme["purple"]}
+                        onClick={() => handleAddCoffeeToPurchase(coffee.id)}
+                      />
                     </button>
                   </div>
 
