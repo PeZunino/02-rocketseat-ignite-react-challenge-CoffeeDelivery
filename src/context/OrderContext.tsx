@@ -7,6 +7,9 @@ interface OrderContextProps {
   handleIncrementCoffeeAmount: (id: string) => void;
   handleDecrementCoffeeAmount: (id: string) => void;
   handleAddToCart: (coffee: ICoffee, amount: number) => void;
+  handleDecrementFromCart: (id: string) => void;
+  handleIncrementCart: (id: string) => void;
+  removeFromCart: (id: string) => void;
 }
 
 type ICoffee = (typeof coffees)[0];
@@ -51,10 +54,6 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
   }
 
   function handleAddToCart(coffee: ICoffee, amount: number) {
-    //ver se tem na sacola
-    //se tiver somar
-    //se nao tiver adicionar
-
     const hasInCart = cartItems.find((item) => item.coffee == coffee);
 
     if (hasInCart) {
@@ -86,6 +85,37 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
     setPreOrder(updatedOrderList);
   }
 
+  function handleDecrementFromCart(id: string) {
+    const updatedOrderList = cartItems.map((item) => {
+      if (item.coffee.id == id && item.amount > 1) {
+        return {
+          coffee: item.coffee,
+          amount: item.amount - 1,
+        } as CoffeeOrder;
+      }
+      return item;
+    });
+    setCartItems(updatedOrderList);
+  }
+  function handleIncrementCart(id: string) {
+    const updatedOrderList = cartItems.map((item) => {
+      if (item.coffee.id == id) {
+        return {
+          coffee: item.coffee,
+          amount: item.amount + 1,
+        } as CoffeeOrder;
+      }
+      return item;
+    });
+    setCartItems(updatedOrderList);
+  }
+  function removeFromCart(id: string) {
+    console.log("here");
+    console.log(id);
+    const updatedOrderList = cartItems.filter((item) => item.coffee.id != id);
+    setCartItems(updatedOrderList);
+  }
+
   useEffect(() => {
     const availableItems = coffees.map(
       (item) => ({ coffee: item, amount: 1 } as CoffeeOrder)
@@ -100,6 +130,9 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
         handleAddToCart,
         handleDecrementCoffeeAmount,
         handleIncrementCoffeeAmount,
+        handleDecrementFromCart,
+        handleIncrementCart,
+        removeFromCart,
         preOrder,
       }}
     >

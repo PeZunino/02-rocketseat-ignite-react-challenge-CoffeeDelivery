@@ -23,9 +23,21 @@ import { OrderContext } from "../../context/OrderContext";
 import { useContext } from "react";
 
 export function Checkout() {
-  const { cartItems } = useContext(OrderContext);
+  const {
+    cartItems,
+    removeFromCart,
+    handleDecrementFromCart,
+    handleIncrementCart,
+  } = useContext(OrderContext);
   const theme = useTheme();
 
+  const totalCoffeesPrice = cartItems.reduce(
+    (sum, item) => item.coffee.price * item.amount + sum,
+    0
+  );
+
+  const deliveryPrice = 3.9;
+  const totalOrderPrice = totalCoffeesPrice + deliveryPrice;
   return (
     <Content>
       <section>
@@ -128,15 +140,23 @@ export function Checkout() {
                 <div>
                   <div>
                     <button>
-                      <Minus size={14} color={theme["purple"]} />
+                      <Minus
+                        size={14}
+                        color={theme["purple"]}
+                        onClick={() => handleDecrementFromCart(coffee.id)}
+                      />
                     </button>
                     <span>{amount}</span>
                     <button>
-                      <Plus size={14} color={theme["purple"]} />
+                      <Plus
+                        size={14}
+                        color={theme["purple"]}
+                        onClick={() => handleIncrementCart(coffee.id)}
+                      />
                     </button>
                   </div>
 
-                  <button>
+                  <button onClick={() => removeFromCart(coffee.id)}>
                     <Trash size={14} color={theme["purple"]} />
                     RETIRAR
                   </button>
@@ -151,13 +171,14 @@ export function Checkout() {
           ))}
 
           <p>
-            Total de itens <span>R$ 19,80</span>
+            Total de itens
+            <span>{totalCoffeesPrice.toFixed(2).replace(".", ",")}</span>
           </p>
           <p>
-            Entrega <span>R$ 3,50</span>
+            Entrega <span>{deliveryPrice.toFixed(2).replace(".", ",")}</span>
           </p>
           <p>
-            Total <span>R$ 23,30</span>
+            Total <span>{totalOrderPrice.toFixed(2).replace(".", ",")}</span>
           </p>
 
           <NavLink to={"/success"}>CONFIRMAR PEDIDO</NavLink>
