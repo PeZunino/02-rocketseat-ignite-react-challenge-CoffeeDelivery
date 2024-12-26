@@ -87,6 +87,6 @@ export const MainContent = styled.main`
     display: flex;
     flex-wrap: wrap;
     column-gap: 2rem;
-    row-gap: 2.5rem;
+    row-gap: 5rem;
   }
 `;
