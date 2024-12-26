@@ -1,3 +1,4 @@
+import { ButtonHTMLAttributes } from "react";
 import styled from "styled-components";
 
 export const CardContainer = styled.div`
@@ -56,10 +57,13 @@ export const Tag = styled.div`
 `;
 
 export const CardFooter = styled.div`
+  width: 13rem;
   margin-top: auto;
 
   display: flex;
   align-items: center;
+
+  position: relative;
 
   p {
     color: ${({ theme }) => theme.colors["base-text"]};
@@ -71,21 +75,6 @@ export const CardFooter = styled.div`
   div {
     margin-left: 1.5rem;
     margin-right: 0.5rem;
-  }
-
-  > button {
-    line-height: 0;
-
-    svg {
-      padding: 0.5rem;
-      border-radius: 6px;
-
-      background-color: ${({ theme }) => theme.colors["purple-dark"]};
-    }
-
-    &:hover svg {
-      background-color: ${({ theme }) => theme.colors["purple"]};
-    }
   }
 `;
 
@@ -111,5 +100,37 @@ export const CardIncreaseDecreaseOption = styled.div`
   }
   button:hover svg {
     color: ${({ theme }) => theme.colors["purple-dark"]};
+  }
+`;
+
+interface AddToCartButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isChecked?: boolean;
+}
+export const AddToCartButton = styled.button<AddToCartButtonProps>`
+  line-height: 0;
+
+  svg {
+    padding: 0.5rem;
+    border-radius: 6px;
+
+    top: 0;
+    position: absolute;
+
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  #cart {
+    background-color: ${({ theme }) => theme.colors.purple};
+    opacity: ${({ isChecked }) => (isChecked ? 0 : 1)};
+  }
+  &:hover #cart {
+    background-color: ${({ theme }) => theme.colors["purple-dark"]};
+  }
+  #check {
+    opacity: ${({ isChecked }) => (isChecked ? 1 : 0)};
+    background-color: ${({ theme }) => theme.colors.yellow};
+  }
+  &:hover #check {
+    background-color: ${({ theme }) => theme.colors["yellow-dark"]};
   }
 `;

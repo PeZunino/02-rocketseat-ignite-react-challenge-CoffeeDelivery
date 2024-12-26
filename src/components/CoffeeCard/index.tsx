@@ -1,14 +1,20 @@
-import { Minus, Plus, ShoppingCartSimple } from "@phosphor-icons/react";
+import {
+  CheckFat,
+  Minus,
+  Plus,
+  ShoppingCartSimple,
+} from "@phosphor-icons/react";
 import {
   CardFooter,
   CardIncreaseDecreaseOption,
   CardContainer,
   Tag,
+  AddToCartButton,
 } from "./styles";
 import { useTheme } from "styled-components";
-import {  useState } from "react";
+import { useState } from "react";
 import { coffees } from "../../../data.json";
-import {useCart} from '../../hooks/useCart'
+import { useCart } from "../../hooks/useCart";
 export type ICoffee = (typeof coffees)[0];
 
 interface CoffeeCardProps {
@@ -17,9 +23,10 @@ interface CoffeeCardProps {
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
   const { description, id, image, price, tags, title } = coffee;
   const { colors } = useTheme();
-  const { handleNewItemInCart } = useCart();
 
   const [amount, setAmount] = useState(1);
+  const [checkVisibility, setCheckVisibility] = useState(false);
+  const { handleNewItemInCart } = useCart();
 
   function handleIncrementAmount() {
     setAmount((state) => state + 1);
@@ -33,7 +40,13 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
   function handleConfirmItem() {
     handleNewItemInCart({ amount, coffee });
     setAmount(1);
+
+    setCheckVisibility(true);
+    setTimeout(() => {
+      setCheckVisibility(false);
+    }, 1500);
   }
+
   return (
     <CardContainer key={id}>
       <img src={image} />
@@ -62,9 +75,19 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
           </button>
         </CardIncreaseDecreaseOption>
 
-        <button onClick={handleConfirmItem}>
-          <ShoppingCartSimple weight="fill" size={38} color={colors.white} />
-        </button>
+        <AddToCartButton
+          onClick={handleConfirmItem}
+          isChecked={checkVisibility}
+        >
+          <CheckFat weight="fill" size={38} color={colors.white} id="check" />
+
+          <ShoppingCartSimple
+            weight="fill"
+            size={38}
+            color={colors.white}
+            id="cart"
+          />
+        </AddToCartButton>
       </CardFooter>
     </CardContainer>
   );
