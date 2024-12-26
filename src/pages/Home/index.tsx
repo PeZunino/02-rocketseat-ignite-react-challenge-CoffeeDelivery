@@ -1,162 +1,138 @@
-import coffeeCupIlustration from "../../assets/coffee_illustration.svg";
-
-import { useTheme } from "styled-components";
 import {
-  Content,
-  Hero,
-  HeroListItem,
-  HeroList,
+  HeroContainer,
+  HeroContent,
   HeroTitle,
-  CoffeeList,
-  CoffeeListItem,
-  ListItemFotterOptions,
-  ListItemTag,
-} from "./styles";
+  HeroSubTitle,
+  HeroFooter,
+  Info,
+  CoffeeCard,
+  MainContent,
+  Tag,
+  CardFooter,
+  CardIncreaseDecreaseOption,
+} from "./styles.ts";
+import heroImage from "../../assets/hero-img.svg";
 import {
   Coffee,
   Minus,
   Package,
-  Plus,
   ShoppingCart,
-  ShoppingCartSimple,
   Timer,
+  Plus,
+  ShoppingCartSimple,
 } from "@phosphor-icons/react";
-import { useContext } from "react";
-import { OrderContext } from "../../context/OrderContext";
+import { useTheme } from "styled-components";
+import availableCoffees from "../../../data.json";
 
 export function Home() {
-  const {
-    handleAddToCart,
-    handleDecrementCoffeeAmount,
-    handleIncrementCoffeeAmount,
-    preOrder,
-  } = useContext(OrderContext);
-
-  const theme = useTheme();
-
+  const { colors } = useTheme();
   return (
     <>
-      <Hero>
-        <div>
-          <HeroTitle>
-            <p>
-              Encontre o café perfeito <br />
-              para qualquer hora do dia
-            </p>
-            <p>
+      <HeroContainer>
+        <HeroContent>
+          <div>
+            <HeroTitle>
+              Encontre o café perfeito para qualquer hora do dia
+            </HeroTitle>
+            <HeroSubTitle>
               Com o Coffee Delivery você recebe seu café onde estiver, a
               qualquer hora
-            </p>
-          </HeroTitle>
+            </HeroSubTitle>
+            <HeroFooter>
+              <ul>
+                <Info>
+                  <ShoppingCart
+                    weight="fill"
+                    size={32}
+                    color={colors.white}
+                    style={{ background: colors["yellow-dark"] }}
+                  />
+                  <p>Compra simples e segura</p>
+                </Info>
+                <Info>
+                  <Timer
+                    weight="fill"
+                    size={32}
+                    color={colors.white}
+                    style={{ background: colors.yellow }}
+                  />
+                  <p>Entrega rápida e rastreada</p>
+                </Info>
+              </ul>
 
-          <HeroList>
-            <div>
-              <HeroListItem>
-                <ShoppingCart
-                  weight="fill"
-                  color={theme["white-200"]}
-                  style={{ background: theme["yellow"] }}
-                  size={32}
-                />
-                <p>Compra simples e segura</p>
-              </HeroListItem>
-              <HeroListItem>
-                <Timer
-                  weight="fill"
-                  color={theme["white-200"]}
-                  style={{ background: theme["yellow-dark"] }}
-                  size={32}
-                />
-                <p>Entregua rápida e rastreada</p>
-              </HeroListItem>
-            </div>
-            <div>
-              <HeroListItem>
-                <Package
-                  weight="fill"
-                  color={theme["white-200"]}
-                  style={{ background: theme["gray-300"] }}
-                  size={32}
-                />
-                <p>Embalagem mantem o café intacto</p>
-              </HeroListItem>
-              <HeroListItem>
-                <Coffee
-                  weight="fill"
-                  color={theme["white-200"]}
-                  style={{ background: theme["purple"] }}
-                  size={32}
-                />
-                <p>Seu café chega fresquinho até você</p>
-              </HeroListItem>
-            </div>
-          </HeroList>
-        </div>
-        <img
-          src={coffeeCupIlustration}
-          alt="copo de café do coffee delivery com fundo amarelo e grãos"
-        />
-      </Hero>
-      <Content>
-        <p>Nossos cafés</p>
+              <ul>
+                <Info>
+                  <Package
+                    weight="fill"
+                    size={32}
+                    color={colors.white}
+                    style={{ background: colors["base-text"] }}
+                  />
+                  <p>Embalagem mantém o café intacto</p>
+                </Info>
+                <Info>
+                  <Coffee
+                    weight="fill"
+                    size={32}
+                    color={colors.white}
+                    style={{ background: colors.purple }}
+                  />
+                  <p>O café chega fresquinho até você</p>
+                </Info>
+              </ul>
+            </HeroFooter>
+          </div>
 
-        <CoffeeList>
-          <CoffeeList>
-            {preOrder.map(({ coffee, amount }) => (
-              <CoffeeListItem key={coffee.id}>
-                <img src={coffee.image} />
-                <ListItemTag>
-                  {coffee.tags.map((tag, index) => (
-                    <p key={index}>{tag}</p>
-                  ))}
-                </ListItemTag>
+          <img src={heroImage} />
+        </HeroContent>
+      </HeroContainer>
 
-                <p>{coffee.title}</p>
-                <p>{coffee.description}</p>
+      <MainContent>
+        <h2>Nossos Cafés</h2>
+        <div>
+          {availableCoffees.coffees.map((coffee) => (
+            <CoffeeCard key={coffee.id}>
+              <img src={coffee.image} />
 
-                <ListItemFotterOptions>
-                  <p>
-                    <span>R$ </span>
+              <div>
+                {coffee.tags.map((tag) => (
+                  <Tag key={tag}>{tag.toUpperCase()}</Tag>
+                ))}
+              </div>
+
+              <p>{coffee.title}</p>
+              <span>{coffee.description}</span>
+
+              <CardFooter>
+                <p>
+                  R${" "}
+                  <span>
                     {String(coffee.price).padEnd(4, "0").replace(".", ",")}
-                  </p>
+                  </span>
+                </p>
 
-                  <div>
-                    <button>
-                      <Minus
-                        size={32}
-                        color={theme["purple"]}
-                        onClick={() => handleDecrementCoffeeAmount(coffee.id)}
-                      />
-                    </button>
-                    <span>
-                      {
-                        preOrder.find((item) => item.coffee.id == coffee.id)
-                          ?.amount
-                      }
-                    </span>
-                    <button>
-                      <Plus
-                        size={32}
-                        color={theme["purple"]}
-                        onClick={() => handleIncrementCoffeeAmount(coffee.id)}
-                      />
-                    </button>
-                  </div>
-
-                  <button onClick={() => handleAddToCart(coffee, amount)}>
-                    <ShoppingCartSimple
-                      weight="fill"
-                      color={theme["white-200"]}
-                      style={{ background: theme["purple"] }}
-                      size={32}
-                    />
+                <CardIncreaseDecreaseOption>
+                  <button>
+                    <Minus size={14} />
                   </button>
-                </ListItemFotterOptions>
-              </CoffeeListItem>
-            ))}
-          </CoffeeList>
-        </CoffeeList>
-      </Content>
+                  <span>1</span>
+                  <button>
+                    <Plus size={14} />
+                  </button>
+                </CardIncreaseDecreaseOption>
+
+                <button>
+                  <ShoppingCartSimple
+                    weight="fill"
+                    size={38}
+                    color={colors.white}
+                  />
+                </button>
+              </CardFooter>
+            </CoffeeCard>
+          ))}
+        </div>
+      </MainContent>
     </>
   );
 }

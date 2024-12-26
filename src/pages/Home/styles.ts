@@ -1,66 +1,67 @@
 import styled from "styled-components";
+import heroBackground from "../../assets/hero-bg.svg";
 
-export const Hero = styled.section`
-  max-width: 70rem;
-  margin: 0 auto;
+export const HeroContainer = styled.section`
+  height: 34rem;
+
   padding-top: 5.875rem;
-  padding-bottom: 8.75rem;
+  padding-bottom: 6.75rem;
+
+  background-image: url(${heroBackground});
+`;
+
+export const HeroContent = styled.div`
+  width: 70rem;
+
+  margin: 0 auto;
 
   display: flex;
   gap: 3.5rem;
 
-  > div {
-    flex: 1;
-  }
-
-  @media (max-width: 1024px) {
-    padding-left: 0.5rem;
+  div {
+    width: 36.75rem;
   }
 `;
 
-export const HeroTitle = styled.div`
-  > p:nth-child(1) {
-    color: ${(props) => props.theme["gray-500"]};
+export const HeroTitle = styled.h1`
+  margin-bottom: 1rem;
 
-    font-family: "Baloo 2", serif;
-    font-weight: 800;
-    font-size: 3rem;
-    line-height: 140%;
-  }
+  color: ${({ theme }) => theme.colors["base-title"]};
 
-  > p:nth-child(2) {
-    margin-top: 1rem;
-    margin-bottom: 4.125rem;
-
-    color: ${(props) => props.theme["gray-400"]};
-
-    font-size: 1.25rem;
-    line-height: 140%;
-  }
-
-  @media (max-width: 1024px) {
-    > p:nth-child(1) {
-      font-size: 2.5rem;
-    }
-  }
+  ${({ theme }) => theme.fonts.titleXL};
 `;
 
-export const HeroList = styled.div`
+export const HeroSubTitle = styled.p`
+  color: ${({ theme }) => theme.colors["base-title"]};
+
+  ${({ theme }) => theme.fonts.textL};
+`;
+
+export const HeroFooter = styled.footer`
+  margin-top: 4.125rem;
+
   display: flex;
   justify-content: space-between;
-`;
 
-export const HeroListItem = styled.div`
+  ul {
+    list-style: none;
+  }
+`;
+export const Info = styled.li`
   display: flex;
   align-items: center;
 
-  color: ${(props) => props.theme["gray-300"]};
-
-  > svg {
-    padding: 0.4rem 0.2rem;
+  svg {
+    padding: 0.5rem 0.4rem;
     margin-right: 0.75rem;
 
     border-radius: 999px;
+  }
+
+  p {
+    color: ${({ theme }) => theme.colors["base-text"]};
+
+    ${({ theme }) => theme.fonts.textM};
   }
 
   & + & {
@@ -68,120 +69,138 @@ export const HeroListItem = styled.div`
   }
 `;
 
-export const Content = styled.main`
-  max-width: 70rem;
+export const MainContent = styled.main`
+  width: 70rem;
+
   margin: 0 auto;
+  margin-bottom: 9.8rem;
+  h2 {
+    margin-top: 2rem;
+    color: ${({ theme }) => theme.colors["base-subtitle"]};
 
-  > p {
-    margin-bottom: 3.375rem;
-
-    font-family: "Baloo 2", serif;
-    font-weight: 800;
-    font-size: 2rem;
+    ${({ theme }) => theme.fonts.titleL};
   }
 
-  @media (max-width: 1024px) {
-    padding-left: 0.5rem;
+  > div {
+    margin-top: 5.875rem;
+
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 2rem;
+    row-gap: 2.5rem;
   }
 `;
 
-export const CoffeeList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  column-gap: 2rem;
-`;
-
-export const CoffeeListItem = styled.div`
-  height: 19.375rem;
+export const CoffeeCard = styled.div`
   width: 16rem;
-  margin-bottom: 2.5rem;
-  padding: 1.25rem;
-  padding-top: 0;
+  height: 19.375rem;
+
+  padding-bottom: 1.25rem;
+  border-radius: 6px 36px;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  border-radius: 6px 36px;
-  background-color: ${(props) => props.theme["white-300"]};
+  position: relative;
+
+  background: ${({ theme }) => theme.colors["base-card"]};
 
   img {
-    transform: translateY(-20px);
+    width: 7.5rem;
+
+    margin-top: -40px;
   }
 
-  > p:nth-child(3) {
-    color: ${(props) => props.theme["gray-500"]};
+  > p {
+    color: ${({ theme }) => theme.colors["base-subtitle"]};
 
-    font-family: "Baloo 2", serif;
-    font-size: 1.25rem;
-    font-weight: bold;
+    ${({ theme }) => theme.fonts.titleS};
   }
+  > span {
+    margin: 0.5rem 1.25rem;
 
-  p:nth-child(4) {
-    color: ${(props) => props.theme["gray-200"]};
-
-    margin-top: 0.5rem;
-    margin-bottom: 2.0625rem;
     text-align: center;
-    font-size: 0.875rem;
+
+    color: ${({ theme }) => theme.colors["base-label"]};
+
+    ${({ theme }) => theme.fonts.textS};
   }
 `;
 
-export const ListItemTag = styled.div`
-  display: flex;
-  gap: 0.25rem;
-  p {
-    width: fit-content;
-    padding: 0.25rem 0.5rem;
-    margin-bottom: 1rem;
+export const Tag = styled.div`
+  padding: 0.25rem 0.8rem;
+  margin-top: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 999px;
 
-    border-radius: 999px;
-    color: ${(props) => props.theme["yellow-dark"]};
-    background: ${(props) => props.theme["yellow-light"]};
+  display: inline-block;
 
-    font-size: 0.625rem;
-    font-weight: bold;
+  color: ${({ theme }) => theme.colors["yellow-dark"]};
+  background: ${({ theme }) => theme.colors["yellow-light"]};
+
+  ${({ theme }) => theme.fonts.tag};
+
+  & + & {
+    margin-left: 0.25rem;
   }
 `;
 
-export const ListItemFotterOptions = styled.div`
+export const CardFooter = styled.div`
   margin-top: auto;
 
   display: flex;
   align-items: center;
 
   p {
-    color: ${(props) => props.theme["gray-300"]};
+    color: ${({ theme }) => theme.colors["base-text"]};
+    ${({ theme }) => theme.fonts.textS};
+  }
+  p span {
+    ${({ theme }) => theme.fonts.titleM};
+  }
+  div {
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
+  }
 
-    font-family: "Baloo 2", serif;
-    font-weight: 800;
-    font-size: 1.5rem;
+  > button {
+    line-height: 0;
 
-    span {
-      font-family: "Roboto", serif;
-      font-weight: 400;
-      font-size: 0.875rem;
+    svg {
+      padding: 0.5rem;
+      border-radius: 6px;
+
+      background-color: ${({ theme }) => theme.colors["purple-dark"]};
+    }
+
+    &:hover svg {
+      background-color: ${({ theme }) => theme.colors["purple"]};
     }
   }
+`;
 
-  div {
-    margin-left: 1.4375rem;
-    margin-right: 0.5rem;
+export const CardIncreaseDecreaseOption = styled.div`
+  padding: 0.5rem;
+  border-radius: 6px;
 
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 
-    border-radius: 6px;
-    background: ${(props) => props.theme["white-500"]};
+  background: ${({ theme }) => theme.colors["base-button"]};
+
+  span {
+    width: 1.25rem;
+    text-align: center;
+
+    color: ${({ theme }) => theme.colors["base-title"]};
+    ${({ theme }) => theme.fonts.textM};
   }
-
-  button {
-    line-height: 0;
+  button svg {
+    color: ${({ theme }) => theme.colors["purple"]};
   }
-
-  svg {
-    padding: 0.3rem 0.5rem;
-
-    border-radius: 6px;
+  button:hover svg {
+    color: ${({ theme }) => theme.colors["purple-dark"]};
   }
 `;
