@@ -58,6 +58,7 @@ export const CartButton = styled.button`
     background: ${({ theme }) => theme.colors["yellow-dark"]};
 
     ${({ theme }) => theme.fonts.textXS};
+    line-height: 0;
 
     top: -20%;
     right: -20%;
