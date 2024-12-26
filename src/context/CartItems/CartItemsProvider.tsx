@@ -1,25 +1,14 @@
-import { createContext, ReactNode, useState } from "react";
-import { ICoffee } from "../components/CoffeeCard";
-
-interface CartItem {
-  coffee: ICoffee;
-  amount: number;
-}
+import { ReactNode, useState } from "react";
+import { CartItemsContext, ICartItem } from "./CartItemsContext";
 
 interface CartContextProviderProps {
   children: ReactNode;
 }
-interface CartContextProps {
-  cartItems: CartItem[];
-  handleNewItemInCart: (item: CartItem) => void;
-}
-
-export const CartItemsContext = createContext({} as CartContextProps);
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<ICartItem[]>([]);
 
-  function handleNewItemInCart(newItem: CartItem) {
+  function handleNewItemInCart(newItem: ICartItem) {
     const alreadyInCart = cartItems.find(
       ({ coffee }) => coffee.id == newItem.coffee.id
     );
@@ -34,7 +23,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         return {
           amount: amount + newItem.amount,
           coffee,
-        } as CartItem;
+        } as ICartItem;
       }
       return { amount, coffee };
     });

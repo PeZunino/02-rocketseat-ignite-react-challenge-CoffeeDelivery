@@ -4,7 +4,7 @@ import { defaultTheme } from "./styles/themes/default";
 import { BrowserRouter } from "react-router-dom";
 import { Router } from "./Router";
 import { OrderContextProvider } from "./context/OrderContext";
-import { CartContextProvider } from "./context/CartContext";
+import { CartContextProvider } from "./context/CartItems/CartItemsProvider";
 
 export function App() {
   return (
