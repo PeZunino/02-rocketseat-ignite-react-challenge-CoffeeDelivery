@@ -6,10 +6,9 @@ import {
   Tag,
 } from "./styles";
 import { useTheme } from "styled-components";
-import { useContext, useState } from "react";
+import {  useState } from "react";
 import { coffees } from "../../../data.json";
-import { CartItemsContext } from "../../context/CartContext";
-
+import {useCart} from '../../hooks/useCart'
 export type ICoffee = (typeof coffees)[0];
 
 interface CoffeeCardProps {
@@ -18,7 +17,7 @@ interface CoffeeCardProps {
 export function CoffeeCard({ coffee }: CoffeeCardProps) {
   const { description, id, image, price, tags, title } = coffee;
   const { colors } = useTheme();
-  const { handleNewItemInCart } = useContext(CartItemsContext);
+  const { handleNewItemInCart } = useCart();
 
   const [amount, setAmount] = useState(1);
 

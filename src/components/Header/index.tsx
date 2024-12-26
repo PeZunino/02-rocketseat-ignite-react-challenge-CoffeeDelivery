@@ -2,13 +2,12 @@ import { HeaderContainer, LocationContainer, CartButton } from "./styles";
 import coffeeDeliveryLogo from "../../assets/logo.svg";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
-import { useContext } from "react";
-import { CartItemsContext } from "../../context/CartContext";
+import { useCart } from "../../hooks/useCart";
 
 export function Header() {
   const { colors } = useTheme();
 
-  const { cartItems } = useContext(CartItemsContext);
+  const { cartItems } = useCart();
 
   const cartItemsAmount = cartItems.length;
   return (
