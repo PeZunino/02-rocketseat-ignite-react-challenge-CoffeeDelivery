@@ -5,24 +5,13 @@ import {
   HeroSubTitle,
   HeroFooter,
   Info,
-  CoffeeCard,
   MainContent,
-  Tag,
-  CardFooter,
-  CardIncreaseDecreaseOption,
 } from "./styles.ts";
 import heroImage from "../../assets/hero-img.svg";
-import {
-  Coffee,
-  Minus,
-  Package,
-  ShoppingCart,
-  Timer,
-  Plus,
-  ShoppingCartSimple,
-} from "@phosphor-icons/react";
+import { Coffee, Package, ShoppingCart, Timer } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
-import availableCoffees from "../../../data.json";
+import { coffees } from "../../../data.json";
+import { CoffeeCard } from "../../components/CoffeeCard/index.tsx";
 
 export function Home() {
   const { colors } = useTheme();
@@ -90,46 +79,8 @@ export function Home() {
       <MainContent>
         <h2>Nossos Cafés</h2>
         <div>
-          {availableCoffees.coffees.map((coffee) => (
-            <CoffeeCard key={coffee.id}>
-              <img src={coffee.image} />
-
-              <div>
-                {coffee.tags.map((tag) => (
-                  <Tag key={tag}>{tag.toUpperCase()}</Tag>
-                ))}
-              </div>
-
-              <p>{coffee.title}</p>
-              <span>{coffee.description}</span>
-
-              <CardFooter>
-                <p>
-                  R${" "}
-                  <span>
-                    {String(coffee.price).padEnd(4, "0").replace(".", ",")}
-                  </span>
-                </p>
-
-                <CardIncreaseDecreaseOption>
-                  <button>
-                    <Minus size={14} />
-                  </button>
-                  <span>1</span>
-                  <button>
-                    <Plus size={14} />
-                  </button>
-                </CardIncreaseDecreaseOption>
-
-                <button>
-                  <ShoppingCartSimple
-                    weight="fill"
-                    size={38}
-                    color={colors.white}
-                  />
-                </button>
-              </CardFooter>
-            </CoffeeCard>
+          {coffees.map((coffee) => (
+            <CoffeeCard key={coffee.id} coffee={coffee} />
           ))}
         </div>
       </MainContent>

@@ -2,15 +2,15 @@ import { HeaderContainer, LocationContainer, CartButton } from "./styles";
 import coffeeDeliveryLogo from "../../assets/logo.svg";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
+import { useContext } from "react";
+import { CartItemsContext } from "../../context/CartContext";
 
-interface HeaderProps {
-  cartItems: number;
-}
-
-export function Header({ cartItems }: HeaderProps) {
+export function Header() {
   const { colors } = useTheme();
 
-  const hasItems = cartItems > 0;
+  const { cartItems } = useContext(CartItemsContext);
+
+  const cartItemsAmount = cartItems.length;
   return (
     <HeaderContainer>
       <img src={coffeeDeliveryLogo} />
@@ -22,7 +22,7 @@ export function Header({ cartItems }: HeaderProps) {
         </LocationContainer>
 
         <CartButton>
-          {hasItems ? <span>{cartItems}</span> : null}
+          {cartItemsAmount > 0 ? <span>{cartItemsAmount}</span> : null}
           <ShoppingCart weight="fill" size={22} color={colors["yellow-dark"]} />
         </CartButton>
       </aside>
