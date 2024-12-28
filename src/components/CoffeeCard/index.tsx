@@ -1,20 +1,10 @@
-import {
-  CheckFat,
-  Minus,
-  Plus,
-  ShoppingCartSimple,
-} from "@phosphor-icons/react";
-import {
-  CardFooter,
-  CardIncreaseDecreaseOption,
-  CardContainer,
-  Tag,
-  AddToCartButton,
-} from "./styles";
+import { CheckFat, ShoppingCartSimple } from "@phosphor-icons/react";
+import { CardFooter, CardContainer, Tag, AddToCartButton } from "./styles";
 import { useTheme } from "styled-components";
 import { useState } from "react";
 import { coffees } from "../../../data.json";
 import { useCart } from "../../hooks/useCart";
+import { IncreaseDecreaseAmountButton } from "../IncreaseDecreaseAmountButton";
 export type ICoffee = (typeof coffees)[0];
 
 interface CoffeeCardProps {
@@ -26,7 +16,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 
   const [amount, setAmount] = useState(1);
   const [checkVisibility, setCheckVisibility] = useState(false);
-  const { handleNewItemInCart } = useCart();
+  const { addNewItem } = useCart();
 
   function handleIncrementAmount() {
     setAmount((state) => state + 1);
@@ -38,7 +28,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
   }
 
   function handleConfirmItem() {
-    handleNewItemInCart({ amount, coffee });
+    addNewItem({ amount, coffee });
     setAmount(1);
 
     setCheckVisibility(true);
@@ -65,15 +55,11 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
           R$ <span>{String(price).padEnd(4, "0").replace(".", ",")}</span>
         </p>
 
-        <CardIncreaseDecreaseOption>
-          <button onClick={handleDecrementAmount}>
-            <Minus size={14} />
-          </button>
-          <span>{amount}</span>
-          <button onClick={handleIncrementAmount}>
-            <Plus size={14} />
-          </button>
-        </CardIncreaseDecreaseOption>
+        <IncreaseDecreaseAmountButton
+          amount={amount}
+          increaseAmount={handleIncrementAmount}
+          decreaseAmount={handleDecrementAmount}
+        />
 
         <AddToCartButton
           onClick={handleConfirmItem}

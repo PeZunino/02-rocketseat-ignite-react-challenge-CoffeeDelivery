@@ -8,7 +8,10 @@ export interface ICartItem {
 
 interface CartContextProps {
   cartItems: ICartItem[];
-  handleNewItemInCart: (item: ICartItem) => void;
+  addNewItem: (item: ICartItem) => void;
+  decrementAmount: (id: string) => void;
+  incrementAmount: (id: string) => void;
+  removeItem: (id: string) => void;
 }
 
 export const CartItemsContext = createContext({} as CartContextProps);

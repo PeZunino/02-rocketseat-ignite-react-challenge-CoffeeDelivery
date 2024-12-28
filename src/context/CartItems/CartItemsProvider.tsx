@@ -8,30 +8,67 @@ interface CartContextProviderProps {
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
 
-  function handleNewItemInCart(newItem: ICartItem) {
+  function decrementAmount(id: string) {
+    setCartItems((state) =>
+      state.map((item) => {
+        if (item.coffee.id == id) {
+          return {
+            amount: item.amount - 1,
+            coffee: item.coffee,
+          } as ICartItem;
+        }
+        return item;
+      })
+    );
+  }
+  function incrementAmount(id: string) {
+    setCartItems((state) =>
+      state.map((item) => {
+        if (item.coffee.id == id) {
+          return {
+            amount: item.amount + 1,
+            coffee: item.coffee,
+          } as ICartItem;
+        }
+        return item;
+      })
+    );
+  }
+
+  function removeItem(id: string) {
+    setCartItems(cartItems.filter((item) => item.coffee.id != id));
+  }
+
+  function addNewItem(newItem: ICartItem) {
     const alreadyInCart = cartItems.find(
       ({ coffee }) => coffee.id == newItem.coffee.id
     );
 
-    if (alreadyInCart == undefined) {
-      setCartItems((state) => [...state, newItem]);
-      return;
-    }
-
-    const updatedCartItems = cartItems.map(({ amount, coffee }) => {
-      if (coffee.id == newItem.coffee.id) {
-        return {
-          amount: amount + newItem.amount,
-          coffee,
-        } as ICartItem;
+    setCartItems((state) => {
+      if (!alreadyInCart) {
+        return [...state, newItem];
       }
-      return { amount, coffee };
+      return state.map(({ amount, coffee }) => {
+        if (coffee.id == newItem.coffee.id) {
+          return {
+            amount: amount + newItem.amount,
+            coffee,
+          } as ICartItem;
+        }
+        return { amount, coffee };
+      });
     });
-
-    setCartItems(updatedCartItems);
   }
   return (
-    <CartItemsContext.Provider value={{ handleNewItemInCart, cartItems }}>
+    <CartItemsContext.Provider
+      value={{
+        addNewItem,
+        cartItems,
+        decrementAmount,
+        incrementAmount,
+        removeItem,
+      }}
+    >
       {children}
     </CartItemsContext.Provider>
   );

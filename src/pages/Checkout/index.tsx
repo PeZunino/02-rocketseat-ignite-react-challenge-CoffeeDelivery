@@ -1,189 +1,115 @@
+import { useTheme } from "styled-components";
+import {
+  ContentContainer,
+  AddressFormContainer,
+  PaymentTypeContainer,
+  OrderResume,
+  ContainerTitle,
+  Input,
+  AddressForm,
+} from "./styles.ts";
 import {
   MapPinLine,
   CurrencyDollar,
   Bank,
   CreditCard,
   Money,
-  Minus,
-  Plus,
-  Trash,
 } from "@phosphor-icons/react";
-import {
-  Content,
-  Title,
-  AddressContainer,
-  ContainerHeader,
-  Item,
-  ItemOptions,
-} from "./styles";
-
-import { useTheme } from "styled-components";
-import { NavLink } from "react-router-dom";
-import { OrderContext } from "../../context/OrderContext";
-import { useContext } from "react";
-
+import { useCart } from "../../hooks/useCart.tsx";
+import { IncreaseDecreaseAmountButton } from "../../components/IncreaseDecreaseAmountButton/index.tsx";
 export function Checkout() {
-  const {
-    cartItems,
-    removeFromCart,
-    handleDecrementFromCart,
-    handleIncrementCart,
-  } = useContext(OrderContext);
-  const theme = useTheme();
+  const { colors } = useTheme();
+  const { cartItems, decrementAmount, incrementAmount } = useCart();
 
-  const totalCoffeesPrice = cartItems.reduce(
-    (sum, item) => item.coffee.price * item.amount + sum,
-    0
-  );
-
-  const deliveryPrice = 3.9;
-  const totalOrderPrice = totalCoffeesPrice + deliveryPrice;
   return (
-    <Content>
-      <section>
-        <Title>Complete seu pedido</Title>
-
-        <AddressContainer>
-          <ContainerHeader>
-            <MapPinLine size={22} color={theme["yellow-dark"]} />
-
+    <ContentContainer>
+      <main>
+        <h3>Complete seu pedido</h3>
+        <AddressFormContainer>
+          <ContainerTitle>
+            <MapPinLine size={22} color={colors["yellow-dark"]} />
             <div>
               <p>Endereço de Entrega</p>
               <span>Informe o endereço onde deseja receber seu pedido</span>
             </div>
-          </ContainerHeader>
+          </ContainerTitle>
 
-          <form action="">
-            <input id="code" aria-label="code" type="text" placeholder="CEP" />
-            <input
-              id="street"
-              aria-label="street"
-              type="text"
-              placeholder="Rua"
-            />
-
+          <AddressForm action="">
             <div>
-              <input
-                id="number"
-                aria-label="number"
-                type="text"
-                placeholder="Número"
-              />
-              <input
-                id="complement"
-                aria-label="complement"
-                type="text"
-                placeholder="Complemento"
-              />
+              <label htmlFor="code" />
+              <Input type="text" placeholder="CEP" id="code" />
             </div>
-
             <div>
-              <input
-                id="neighborhood"
-                aria-label="neighborhood"
-                type="text"
-                placeholder="Bairro"
-              />
-              <input
-                id="city"
-                aria-label="city"
-                type="text"
-                placeholder="Cidade"
-              />
-              <input
-                id="state"
-                aria-label="state"
-                type="text"
-                placeholder="UF"
-              />
+              <label htmlFor="street" />
+              <Input type="text" placeholder="Rua" id="street" />
             </div>
-          </form>
-        </AddressContainer>
+            <div>
+              <label htmlFor="number" />
+              <Input type="text" placeholder="Número" id="number" />
+              <label htmlFor="complement" />
+              <Input type="text" placeholder="Complemento" id="complement" />
+            </div>
+            <div>
+              <label htmlFor="neighborhood" />
+              <Input type="text" placeholder="Bairro" id="neighborhood" />
+              <label htmlFor="city" />
+              <Input type="text" placeholder="Cidade" id="city" />
+              <label htmlFor="state" />
+              <Input type="text" placeholder="UF" id="state" />
+            </div>
+          </AddressForm>
+        </AddressFormContainer>
 
-        <footer>
-          <ContainerHeader>
-            <CurrencyDollar size={22} color={theme["purple"]} />
+        <PaymentTypeContainer>
+          <ContainerTitle>
+            <CurrencyDollar size={22} color={colors.purple} />
             <div>
               <p>Pagamento</p>
               <span>
-                O pagamento é feito na entrega escolha a forma de pagar
+                O pagamento é feito na entrega. Escolha a forma que desejar
+                pagar
               </span>
             </div>
-          </ContainerHeader>
-          <div>
-            <button>
-              <CreditCard size={16} color={theme.purple} />
-              CARTÃO DE CRÉDITO
-            </button>
-            <button>
-              <Bank size={16} color={theme.purple} />
-              CARTÃO DE DÉBITO
-            </button>
-            <button>
-              <Money size={16} color={theme.purple} />
-              DINHEIRO
-            </button>
-          </div>
-        </footer>
-      </section>
+          </ContainerTitle>
+
+          <form action="">
+            <input name="paymentType" type="radio" id="credit" value="credit" />
+            <label htmlFor="credit">
+              <CreditCard size={16} color={colors.purple} />
+              <span>CARTÃO DE CRÉDITO</span>
+            </label>
+            <input name="paymentType" type="radio" id="debit" value="debit" />
+            <label htmlFor="debit">
+              <Bank size={16} color={colors.purple} />
+              <span>CARTÃO DE DÉBITO</span>
+            </label>
+            <input name="paymentType" type="radio" id="money" value="money" />
+            <label htmlFor="money">
+              <Money size={16} color={colors.purple} />
+              <span>DINHEIRO</span>
+            </label>
+          </form>
+        </PaymentTypeContainer>
+      </main>
 
       <aside>
-        <Title>Cafés selecionados</Title>
-        <div>
-          {cartItems.map(({ amount, coffee }) => (
-            <Item key={coffee.id}>
+        <h3>Cafés selecionados</h3>
+        <OrderResume>
+          {cartItems.map(({ coffee, amount }) => (
+            <div>
               <img src={coffee.image} />
-
-              <ItemOptions>
+              <div>
                 <p>{coffee.title}</p>
-
-                <div>
-                  <div>
-                    <button>
-                      <Minus
-                        size={14}
-                        color={theme["purple"]}
-                        onClick={() => handleDecrementFromCart(coffee.id)}
-                      />
-                    </button>
-                    <span>{amount}</span>
-                    <button>
-                      <Plus
-                        size={14}
-                        color={theme["purple"]}
-                        onClick={() => handleIncrementCart(coffee.id)}
-                      />
-                    </button>
-                  </div>
-
-                  <button onClick={() => removeFromCart(coffee.id)}>
-                    <Trash size={14} color={theme["purple"]} />
-                    RETIRAR
-                  </button>
-                </div>
-              </ItemOptions>
-
-              <p>
-                <span>R$ </span>
-                {String(coffee.price).padEnd(4, "0").replace(".", ",")}
-              </p>
-            </Item>
+              </div>
+              <IncreaseDecreaseAmountButton
+                amount={amount}
+                decreaseAmount={() => decrementAmount(coffee.id)}
+                increaseAmount={() => incrementAmount(coffee.id)}
+              />
+            </div>
           ))}
-
-          <p>
-            Total de itens
-            <span>{totalCoffeesPrice.toFixed(2).replace(".", ",")}</span>
-          </p>
-          <p>
-            Entrega <span>{deliveryPrice.toFixed(2).replace(".", ",")}</span>
-          </p>
-          <p>
-            Total <span>{totalOrderPrice.toFixed(2).replace(".", ",")}</span>
-          </p>
-
-          <NavLink to={"/success"}>CONFIRMAR PEDIDO</NavLink>
-        </div>
+        </OrderResume>
       </aside>
-    </Content>
+    </ContentContainer>
   );
 }

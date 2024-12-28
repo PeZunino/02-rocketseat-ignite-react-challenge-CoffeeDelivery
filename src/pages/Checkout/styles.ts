@@ -1,219 +1,199 @@
 import styled from "styled-components";
 
-export const Content = styled.main`
+export const ContentContainer = styled.div`
   max-width: 70rem;
   margin: 0 auto;
-  padding-top: 2.5rem;
 
   display: flex;
   gap: 2rem;
 
-  section {
+  main {
     width: 40rem;
-
-    > div,
-    footer {
-      padding: 2.5rem;
-      border-radius: 6px;
-      background-color: ${(props) => props.theme["white-300"]};
-    }
-
-    footer div button {
-      width: 11.16rem;
-      padding: 1rem;
-
-      display: inline-flex;
-      align-items: center;
-
-      border-radius: 6px;
-      color: ${(props) => props.theme["gray-300"]};
-      background-color: ${(props) => props.theme["white-500"]};
-
-      font-size: 0.75rem;
-
-      svg {
-        margin-right: 0.75rem;
-      }
-      & + button {
-        margin-left: 0.75rem;
-      }
-    }
   }
-
   aside {
     flex: 1;
+  }
 
-    > div {
-      padding: 2.5rem;
+  h3 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    color: ${({ theme }) => theme.colors["base-subtitle"]};
 
-      border-radius: 6px 44px;
-      background-color: ${(props) => props.theme["white-300"]};
-    }
-
-    > div > p {
-      display: flex;
-      justify-content: space-between;
-    }
-    > div > p:not(:last-of-type) {
-      margin-bottom: 0.875rem;
-
-      color: ${(props) => props.theme["gray-300"]};
-
-      font-size: 0.875rem;
-
-      span {
-        font-size: 1rem;
-      }
-    }
-
-    > div > p:last-of-type {
-      margin-bottom: 1.5rem;
-
-      font-size: 1.25rem;
-      font-weight: bold;
-    }
-
-    > div > a {
-      width: 100%;
-      padding: 0.75rem 0rem;
-
-      display: block;
-
-      text-align: center;
-      text-decoration: none;
-      border-radius: 6px;
-      color: ${(props) => props.theme["white-100"]};
-      background-color: ${(props) => props.theme.yellow};
-
-      font-weight: bold;
-      font-size: 0.875rem;
-    }
+    ${({ theme }) => theme.fonts.titleXS};
   }
 `;
 
-export const AddressContainer = styled.div`
+export const AddressFormContainer = styled.div`
+  height: 26.875rem;
+
+  padding: 2.5rem;
   margin-bottom: 0.75rem;
 
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  form input:first-child {
-    display: block;
-    width: 12.5rem;
-  }
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors["base-card"]};
+`;
 
-  form div {
+export const PaymentTypeContainer = styled.div`
+  height: 12.9375rem;
+
+  padding: 2.5rem;
+
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors["base-card"]};
+
+  form {
     display: flex;
     gap: 0.75rem;
   }
 
-  form div:nth-of-type(1) input:nth-of-type(2) {
-    flex: 1;
-  }
-  form div:nth-of-type(2) {
-    justify-content: end;
+  label {
+    width: 11.16rem;
 
-    input:nth-of-type(2) {
-      width: 10.25rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+
+    display: flex;
+    align-items: center;
+
+    color: ${({ theme }) => theme.colors["base-text"]};
+
+    background-color: ${({ theme }) => theme.colors["base-button"]};
+
+    ${({ theme }) => theme.fonts.buttonM};
+
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors["base-hover"]};
     }
-    input:last-child {
-      width: 3.75rem;
+
+    svg {
+      margin-left: 1rem;
+      margin-right: 0.75rem;
+    }
+
+    span {
+      line-height: 0;
     }
   }
 
   input {
-    padding: 0.75rem;
-
-    border: 0;
-    border-radius: 4px;
-    background: ${(props) => props.theme["white-400"]};
+    display: none;
+  }
+  input[type="radio"]:checked + label {
+    border: 1px solid ${({ theme }) => theme.colors["purple"]};
+    background-color: ${({ theme }) => theme.colors["purple-light"]};
   }
 `;
-export const Title = styled.p`
-  margin-bottom: 1rem;
 
-  font-family: "Baloo 2", serif;
-  font-weight: bold;
-  font-size: 1.125rem;
-`;
-export const ContainerHeader = styled.header`
-  margin-bottom: 2rem;
+export const PaymentTypeButton = styled.label`
+  width: 11.16rem;
+
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 6px;
 
   display: flex;
-  gap: 0.5rem;
+  align-items: center;
 
-  p {
-    color: ${(props) => props.theme["gray-400"]};
+  color: ${({ theme }) => theme.colors["base-text"]};
+
+  background-color: ${({ theme }) => theme.colors["base-button"]};
+
+  ${({ theme }) => theme.fonts.buttonM};
+
+  svg {
+    margin-left: 1rem;
+    margin-right: 0.75rem;
   }
 
   span {
-    color: ${(props) => props.theme["gray-300"]};
-
-    font-size: 0.875rem;
-  }
-`;
-
-export const Item = styled.div`
-  padding-bottom: 1.5rem;
-  margin-bottom: 1.5rem;
-  display: flex;
-
-  border-bottom: 1px solid ${(props) => props.theme["white-500"]};
-
-  img {
-    width: 64px;
-  }
-
-  p {
-    margin-bottom: 0.5rem;
-
-    color: ${(props) => props.theme["gray-300"]};
-    font-weight: bold;
-  }
-`;
-
-export const ItemOptions = styled.div`
-  padding-left: 1.25rem;
-  flex: 1;
-
-  display: flex;
-  flex-direction: column;
-
-  > div {
-    display: flex;
-    gap: 0.5rem;
-  }
-  div > div {
-    width: 4.5rem;
-    height: 2rem;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-
-    border-radius: 6px;
-    background: ${(props) => props.theme["white-500"]};
-  }
-
-  button {
     line-height: 0;
   }
+`;
 
-  > div > button {
-    padding: 0rem 0.5rem;
-    display: inline-flex;
-    align-items: center;
+export const ContainerTitle = styled.div`
+  margin-bottom: 2rem;
 
-    border-radius: 6px;
-    color: ${(props) => props.theme["gray-300"]};
-    background-color: ${(props) => props.theme["white-500"]};
+  display: flex;
 
-    font-size: 0.75rem;
-
-    svg {
-      margin-right: 0.25rem;
-    }
+  svg {
+    margin-right: 0.5rem;
   }
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+  p {
+    color: ${({ theme }) => theme.colors["base-subtitle"]};
+
+    ${({ theme }) => theme.fonts.textM};
+  }
+  span {
+    color: ${({ theme }) => theme.colors["base-text"]};
+
+    ${({ theme }) => theme.fonts.textS};
+  }
+`;
+
+export const AddressForm = styled.form`
+  div {
+    margin-bottom: 1rem;
+
+    display: flex;
+  }
+  div:last-of-type {
+    padding-top: 1.8125rem;
+
+    justify-content: end;
+  }
+  input {
+    width: 12.5rem;
+
+    border: 1px solid;
+    border-color: ${({ theme }) => theme.colors["base-button"]};
+
+    background-color: ${({ theme }) => theme.colors["base-input"]};
+  }
+  #street {
+    width: 100%;
+  }
+  #complement {
+    flex: 1;
+  }
+  #city {
+    width: 10.25rem;
+  }
+  #state {
+    width: 5rem;
+  }
+`;
+
+export const Input = styled.input`
+  height: 2.625rem;
+
+  padding: 0.75rem;
+  border: 0;
+  border-radius: 4px;
+
+  color: ${({ theme }) => theme.colors["base-text"]};
+  background-color: ${({ theme }) => theme.colors["base-input"]};
+
+  ${({ theme }) => theme.fonts.textS};
+
+  & + label {
+    margin-right: 0.75rem;
+  }
+`;
+
+export const OrderResume = styled.div`
+  padding: 2.5rem;
+  height: 31.125rem;
+
+  border-radius: 6px 44px;
+
+  background: blue;
 `;
