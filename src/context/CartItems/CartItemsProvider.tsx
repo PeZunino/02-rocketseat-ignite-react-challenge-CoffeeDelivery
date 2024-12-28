@@ -13,7 +13,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
       state.map((item) => {
         if (item.coffee.id == id) {
           return {
-            amount: item.amount - 1,
+            amount: item.amount == 1 ? 1 : item.amount - 1,
             coffee: item.coffee,
           } as ICartItem;
         }
