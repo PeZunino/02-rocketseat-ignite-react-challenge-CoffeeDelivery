@@ -15,6 +15,8 @@ export const HeaderContainer = styled.header`
   }
 
   aside {
+    height: 2.375rem;
+
     display: flex;
     gap: 0.75rem;
   }
@@ -35,15 +37,17 @@ export const LocationContainer = styled.div`
   }
 `;
 
-export const CartButton = styled.button`
-  padding: 0.5rem;
+export const CartButtonContainer = styled.div`
+  a {
+    padding: 0.5rem;
 
-  position: relative;
+    display: flex;
 
-  border-radius: 6px;
-  background: ${({ theme }) => theme.colors["yellow-light"]};
+    border-radius: 6px;
+    background: ${({ theme }) => theme.colors["yellow-light"]};
 
-  line-height: 0;
+    position: relative;
+  }
 
   span {
     width: 1.25rem;

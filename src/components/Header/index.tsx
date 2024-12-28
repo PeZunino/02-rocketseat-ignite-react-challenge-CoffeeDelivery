@@ -1,8 +1,13 @@
-import { HeaderContainer, LocationContainer, CartButton } from "./styles";
+import {
+  HeaderContainer,
+  LocationContainer,
+  CartButtonContainer,
+} from "./styles";
 import coffeeDeliveryLogo from "../../assets/logo.svg";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
 import { useCart } from "../../hooks/useCart";
+import { NavLink } from "react-router-dom";
 
 export function Header() {
   const { colors } = useTheme();
@@ -12,7 +17,9 @@ export function Header() {
   const cartItemsAmount = cartItems.length;
   return (
     <HeaderContainer>
-      <img src={coffeeDeliveryLogo} />
+      <NavLink to="/">
+        <img src={coffeeDeliveryLogo} />
+      </NavLink>
 
       <aside>
         <LocationContainer>
@@ -20,10 +27,16 @@ export function Header() {
           <p>Porto Alegre, RS</p>
         </LocationContainer>
 
-        <CartButton>
-          {cartItemsAmount > 0 ? <span>{cartItemsAmount}</span> : null}
-          <ShoppingCart weight="fill" size={22} color={colors["yellow-dark"]} />
-        </CartButton>
+        <CartButtonContainer>
+          <NavLink to="/checkout">
+            {cartItemsAmount > 0 ? <span>{cartItemsAmount}</span> : null}
+            <ShoppingCart
+              weight="fill"
+              size={22}
+              color={colors["yellow-dark"]}
+            />
+          </NavLink>
+        </CartButtonContainer>
       </aside>
     </HeaderContainer>
   );
