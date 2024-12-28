@@ -7,6 +7,9 @@ import {
   ContainerTitle,
   Input,
   AddressForm,
+  RemoverItemButton,
+  CartItem,
+  ConfirmOrderButton,
 } from "./styles.ts";
 import {
   MapPinLine,
@@ -14,6 +17,7 @@ import {
   Bank,
   CreditCard,
   Money,
+  Trash,
 } from "@phosphor-icons/react";
 import { useCart } from "../../hooks/useCart.tsx";
 import { IncreaseDecreaseAmountButton } from "../../components/IncreaseDecreaseAmountButton/index.tsx";
@@ -96,18 +100,37 @@ export function Checkout() {
         <h3>Cafés selecionados</h3>
         <OrderResume>
           {cartItems.map(({ coffee, amount }) => (
-            <div>
+            <CartItem>
               <img src={coffee.image} />
               <div>
                 <p>{coffee.title}</p>
+                <div>
+                  <IncreaseDecreaseAmountButton
+                    amount={amount}
+                    decreaseAmount={() => decrementAmount(coffee.id)}
+                    increaseAmount={() => incrementAmount(coffee.id)}
+                  />
+                  <RemoverItemButton>
+                    <Trash size={16} color={colors.purple} />
+                    <span>REMOVER</span>
+                  </RemoverItemButton>
+                </div>
               </div>
-              <IncreaseDecreaseAmountButton
-                amount={amount}
-                decreaseAmount={() => decrementAmount(coffee.id)}
-                increaseAmount={() => incrementAmount(coffee.id)}
-              />
-            </div>
+              <span>R$ {(coffee.price * amount).toFixed(2)}</span>
+            </CartItem>
           ))}
+
+          <p>
+            Total de itens <span>R$ 29,90</span>
+          </p>
+          <p>
+            Entrega <span>R$ 3,50</span>
+          </p>
+          <p>
+            Total <span>R$ 33,20</span>
+          </p>
+
+          <ConfirmOrderButton>CONFIRMAR PEDIDO</ConfirmOrderButton>
         </OrderResume>
       </aside>
     </ContentContainer>

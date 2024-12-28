@@ -89,32 +89,6 @@ export const PaymentTypeContainer = styled.div`
   }
 `;
 
-export const PaymentTypeButton = styled.label`
-  width: 11.16rem;
-
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  border-radius: 6px;
-
-  display: flex;
-  align-items: center;
-
-  color: ${({ theme }) => theme.colors["base-text"]};
-
-  background-color: ${({ theme }) => theme.colors["base-button"]};
-
-  ${({ theme }) => theme.fonts.buttonM};
-
-  svg {
-    margin-left: 1rem;
-    margin-right: 0.75rem;
-  }
-
-  span {
-    line-height: 0;
-  }
-`;
-
 export const ContainerTitle = styled.div`
   margin-bottom: 2rem;
 
@@ -195,5 +169,114 @@ export const OrderResume = styled.div`
 
   border-radius: 6px 44px;
 
-  background: blue;
+  background-color: ${({ theme }) => theme.colors["base-card"]};
+
+  > p {
+    display: flex;
+    justify-content: space-between;
+  }
+  > p + p {
+    margin-top: 0.25rem;
+  }
+  > p:nth-of-type(1),
+  p:nth-of-type(2) {
+    color: ${({ theme }) => theme.colors["base-text"]};
+
+    ${({ theme }) => theme.fonts.textS};
+    span {
+      ${({ theme }) => theme.fonts.textM};
+    }
+  }
+
+  > p:nth-of-type(3) {
+    color: ${({ theme }) => theme.colors["base-subtitle"]};
+
+    ${({ theme }) => theme.fonts.textL};
+    font-weight: bold;
+  }
+`;
+
+export const CartItem = styled.div`
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  display: flex;
+
+  border-bottom: 1px solid ${({ theme }) => theme.colors["base-button"]};
+
+  img {
+    width: 4rem;
+    margin-right: 1.25rem;
+  }
+
+  p {
+    color: ${({ theme }) => theme.colors["base-subtitle"]};
+
+    ${({ theme }) => theme.fonts.textM};
+    margin-bottom: 0.5rem;
+  }
+  > div > div {
+    height: 2rem;
+
+    display: flex;
+    gap: 0.5rem;
+  }
+  > span {
+    flex: 1;
+    text-align: end;
+
+    color: ${({ theme }) => theme.colors["base-text"]};
+
+    ${({ theme }) => theme.fonts.textM};
+    font-weight: bold;
+  }
+`;
+export const RemoverItemButton = styled.button`
+  width: 5.68rem;
+  height: 2rem;
+
+  padding: 0.5rem;
+
+  border-radius: 6px;
+  border: 1px solid transparent;
+
+  display: flex;
+  align-items: center;
+
+  color: ${({ theme }) => theme.colors["base-text"]};
+
+  background-color: ${({ theme }) => theme.colors["base-button"]};
+
+  ${({ theme }) => theme.fonts.buttonM};
+
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors["base-hover"]};
+  }
+
+  svg {
+    margin-right: 0.25rem;
+  }
+
+  span {
+    line-height: 0;
+  }
+`;
+
+export const ConfirmOrderButton = styled.button`
+  width: 100%;
+
+  margin-top: 2rem;
+  padding: 0.75rem 0rem;
+
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.colors.yellow};
+
+  color: ${({ theme }) => theme.colors.white};
+
+  ${({ theme }) => theme.fonts.buttonG};
+
+  text-align: center;
 `;
