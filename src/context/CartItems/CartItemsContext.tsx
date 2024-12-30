@@ -11,7 +11,7 @@ interface CartContextProps {
   addNewItem: (item: ICartItem) => void;
   decrementAmount: (id: string) => void;
   incrementAmount: (id: string) => void;
-  clearCart: () => void;
+  cleanCart: () => void;
   removeItem: (id: string) => void;
 }
 

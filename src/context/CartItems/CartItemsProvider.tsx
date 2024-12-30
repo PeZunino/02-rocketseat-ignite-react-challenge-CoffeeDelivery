@@ -1,66 +1,36 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useReducer } from "react";
 import { CartItemsContext, ICartItem } from "./CartItemsContext";
-
+import { cartItemsReducer } from "../../reducer/cartItems/reducer";
+import {
+  addItemToCartAction,
+  cleanCartAction,
+  decrementItemAction,
+  incrementItemAction,
+  removeItemAction,
+} from "../../reducer/cartItems/actions";
 interface CartContextProviderProps {
   children: ReactNode;
 }
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
-  const [cartItems, setCartItems] = useState<ICartItem[]>([]);
+  const [cartItems, dispatch] = useReducer(cartItemsReducer, []);
 
   function decrementAmount(id: string) {
-    setCartItems((state) =>
-      state.map((item) => {
-        if (item.coffee.id == id) {
-          return {
-            amount: item.amount == 1 ? 1 : item.amount - 1,
-            coffee: item.coffee,
-          } as ICartItem;
-        }
-        return item;
-      })
-    );
+    dispatch(decrementItemAction(id));
   }
   function incrementAmount(id: string) {
-    setCartItems((state) =>
-      state.map((item) => {
-        if (item.coffee.id == id) {
-          return {
-            amount: item.amount + 1,
-            coffee: item.coffee,
-          } as ICartItem;
-        }
-        return item;
-      })
-    );
+    dispatch(incrementItemAction(id));
   }
 
   function removeItem(id: string) {
-    setCartItems(cartItems.filter((item) => item.coffee.id != id));
+    dispatch(removeItemAction(id));
   }
-  function clearCart() {
-    setCartItems([]);
+  function cleanCart() {
+    dispatch(cleanCartAction());
   }
 
-  function addNewItem(newItem: ICartItem) {
-    const alreadyInCart = cartItems.find(
-      ({ coffee }) => coffee.id == newItem.coffee.id
-    );
-
-    setCartItems((state) => {
-      if (!alreadyInCart) {
-        return [...state, newItem];
-      }
-      return state.map(({ amount, coffee }) => {
-        if (coffee.id == newItem.coffee.id) {
-          return {
-            amount: amount + newItem.amount,
-            coffee,
-          } as ICartItem;
-        }
-        return { amount, coffee };
-      });
-    });
+  function addNewItem(item: ICartItem) {
+    dispatch(addItemToCartAction(item));
   }
   return (
     <CartItemsContext.Provider
@@ -70,7 +40,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         decrementAmount,
         incrementAmount,
         removeItem,
-        clearCart,
+        cleanCart,
       }}
     >
       {children}
