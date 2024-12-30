@@ -8,7 +8,7 @@
 ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white)
 ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 
-![2024-12-3017-51-23-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/6bc6c702-0614-4b4b-91c3-4f8d26400e60)
+![2024-12-3018-02-27-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/e5b0b397-aabe-4b4c-9661-8b90a36df0bb)
 
 ## 📜 Description
 
