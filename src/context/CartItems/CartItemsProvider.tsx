@@ -38,6 +38,9 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   function removeItem(id: string) {
     setCartItems(cartItems.filter((item) => item.coffee.id != id));
   }
+  function clearCart() {
+    setCartItems([]);
+  }
 
   function addNewItem(newItem: ICartItem) {
     const alreadyInCart = cartItems.find(
@@ -67,6 +70,7 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
         decrementAmount,
         incrementAmount,
         removeItem,
+        clearCart,
       }}
     >
       {children}

@@ -136,7 +136,7 @@ export const PaymentTypeContainer = styled.div`
   }
 
   label {
-    border: 0;
+    border: 1px solid transparent;
 
     width: 11.16rem;
 

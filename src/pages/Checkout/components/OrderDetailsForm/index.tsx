@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 import { useNavigate } from "react-router-dom";
+import { useCart } from "../../../../hooks/useCart";
 
 const orderComplementFormValidationSchema = zod.object({
   code: zod
@@ -58,6 +59,7 @@ type OrderComplementFormData = zod.infer<
 export function OrderDetailsForm() {
   const { colors } = useTheme();
   const navigate = useNavigate();
+  const { clearCart } = useCart();
   const { register, handleSubmit, formState } =
     useForm<OrderComplementFormData>({
       resolver: zodResolver(orderComplementFormValidationSchema),
@@ -69,6 +71,8 @@ export function OrderDetailsForm() {
       },
     });
   function handleConfirmOrder() {
+    clearCart();
+
     navigate("/success");
   }
   const { city, code, neighborhood, number, street, state, paymentType } =
