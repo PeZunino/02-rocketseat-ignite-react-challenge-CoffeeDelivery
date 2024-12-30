@@ -21,6 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../../../hooks/useCart";
+import { useOrderDetails } from "../../../../hooks/useOrderDetails";
 
 const orderComplementFormValidationSchema = zod.object({
   code: zod
@@ -52,7 +53,7 @@ const orderComplementFormValidationSchema = zod.object({
   }),
 });
 
-type OrderComplementFormData = zod.infer<
+export type OrderComplementFormData = zod.infer<
   typeof orderComplementFormValidationSchema
 >;
 
@@ -60,6 +61,8 @@ export function OrderDetailsForm() {
   const { colors } = useTheme();
   const navigate = useNavigate();
   const { clearCart } = useCart();
+  const { updateOrderDetails } = useOrderDetails();
+
   const { register, handleSubmit, formState } =
     useForm<OrderComplementFormData>({
       resolver: zodResolver(orderComplementFormValidationSchema),
@@ -70,9 +73,9 @@ export function OrderDetailsForm() {
         street: "",
       },
     });
-  function handleConfirmOrder() {
+  function handleConfirmOrder(event: OrderComplementFormData) {
     clearCart();
-
+    updateOrderDetails(event);
     navigate("/success");
   }
   const { city, code, neighborhood, number, street, state, paymentType } =

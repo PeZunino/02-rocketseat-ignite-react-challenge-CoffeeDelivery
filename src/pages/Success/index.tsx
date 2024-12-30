@@ -2,8 +2,10 @@ import { Content, Item } from "./styles";
 import deliveryIllustration from "../../assets/delivery-illustration.svg";
 import { Timer, MapPin, CurrencyDollar } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
+import { useOrderDetails } from "../../hooks/useOrderDetails";
 export function Success() {
   const theme = useTheme();
+  const { orderDetails } = useOrderDetails();
   return (
     <Content>
       <div>
@@ -20,8 +22,12 @@ export function Success() {
             />
             <div>
               <p>
-                Entrega em <span>Rua João Daniel , 102 </span>Farrapos - Porto
-                Alegre, RS
+                Entrega em{" "}
+                <span>
+                  {orderDetails?.street}, {orderDetails?.number}{" "}
+                </span>
+                {orderDetails?.neighborhood} - {orderDetails?.city},{" "}
+                {orderDetails?.state}
               </p>
             </div>
           </Item>
