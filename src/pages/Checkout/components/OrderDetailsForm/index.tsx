@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as zod from "zod";
+import { useNavigate } from "react-router-dom";
 
 const orderComplementFormValidationSchema = zod.object({
   code: zod
@@ -56,7 +57,8 @@ type OrderComplementFormData = zod.infer<
 
 export function OrderDetailsForm() {
   const { colors } = useTheme();
-  const { register, handleSubmit, reset, formState } =
+  const navigate = useNavigate();
+  const { register, handleSubmit, formState } =
     useForm<OrderComplementFormData>({
       resolver: zodResolver(orderComplementFormValidationSchema),
       defaultValues: {
@@ -66,11 +68,9 @@ export function OrderDetailsForm() {
         street: "",
       },
     });
-  function handleConfirmOrder(event: OrderComplementFormData) {
-    console.log(event);
-    reset();
+  function handleConfirmOrder() {
+    navigate("/success");
   }
-  console.log(formState.errors);
   const { city, code, neighborhood, number, street, state, paymentType } =
     formState.errors;
   return (
@@ -86,7 +86,7 @@ export function OrderDetailsForm() {
 
         <AddressFormInputGrid>
           <div>
-            <InputContainer hasError={Boolean(code)}>
+            <InputContainer>
               <input
                 type="number"
                 placeholder="CEP"
@@ -100,7 +100,7 @@ export function OrderDetailsForm() {
           </div>
 
           <div>
-            <InputContainer hasError={Boolean(street)}>
+            <InputContainer>
               <input
                 type="text"
                 placeholder="Rua"
@@ -114,7 +114,7 @@ export function OrderDetailsForm() {
           </div>
 
           <div>
-            <InputContainer hasError={Boolean(number)}>
+            <InputContainer>
               <input
                 type="text"
                 placeholder="Número"
@@ -126,13 +126,13 @@ export function OrderDetailsForm() {
               ) : null}
             </InputContainer>
 
-            <InputContainer hasError={false}>
+            <InputContainer>
               <input type="text" placeholder="Complemento" id="complement" />
             </InputContainer>
           </div>
 
           <div>
-            <InputContainer hasError={Boolean(neighborhood)}>
+            <InputContainer>
               <input
                 type="text"
                 placeholder="Bairro"
@@ -143,7 +143,7 @@ export function OrderDetailsForm() {
                 <ErrorMessage>{neighborhood?.message}</ErrorMessage>
               ) : null}
             </InputContainer>
-            <InputContainer hasError={Boolean(city)}>
+            <InputContainer>
               <input
                 type="text"
                 placeholder="Cidade"
@@ -154,7 +154,7 @@ export function OrderDetailsForm() {
                 <ErrorMessage>{city?.message}</ErrorMessage>
               ) : null}
             </InputContainer>
-            <InputContainer hasError={Boolean(state)}>
+            <InputContainer>
               <input
                 type="text"
                 placeholder="UF"
@@ -169,7 +169,7 @@ export function OrderDetailsForm() {
         </AddressFormInputGrid>
       </AddressFormContainer>
 
-      <PaymentTypeContainer hasError={Boolean(paymentType?.message)}>
+      <PaymentTypeContainer>
         <ContainerTitle>
           <CurrencyDollar size={22} color={colors.purple} />
           <div>

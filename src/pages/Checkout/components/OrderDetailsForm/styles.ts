@@ -1,4 +1,3 @@
-import { HTMLAttributes } from "react";
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
@@ -73,10 +72,7 @@ export const AddressFormInputGrid = styled.div`
   }
 `;
 
-interface InputContainerProps extends HTMLAttributes<HTMLInputElement> {
-  hasError: boolean;
-}
-export const InputContainer = styled.label<InputContainerProps>`
+export const InputContainer = styled.label`
   position: relative;
   display: flex;
 
@@ -84,10 +80,8 @@ export const InputContainer = styled.label<InputContainerProps>`
     height: 2.625rem;
 
     padding: 0.75rem;
-    border-width: 1px;
-    border-style: solid;
-    border-color: ${({ hasError, theme }) =>
-      hasError ? theme.colors.red : "transparent"};
+
+    border: 1px solid transparent;
     border-radius: 4px;
 
     color: ${({ theme }) => theme.colors["base-text"]};
@@ -121,16 +115,13 @@ export const ErrorMessage = styled.span`
   position: absolute;
   bottom: -15px;
   left: 5px;
+
   color: ${({ theme }) => theme.colors.red};
 
   ${({ theme }) => theme.fonts.textXS};
 `;
 
-interface PaymentTypeContainerProps extends HTMLAttributes<HTMLDivElement> {
-  hasError: boolean;
-}
-
-export const PaymentTypeContainer = styled.div<PaymentTypeContainerProps>`
+export const PaymentTypeContainer = styled.div`
   height: 12.9375rem;
 
   padding: 2.5rem;
@@ -145,9 +136,7 @@ export const PaymentTypeContainer = styled.div<PaymentTypeContainerProps>`
   }
 
   label {
-    border-width: 1px;
-    border-style: solid;
-    border-color: ${({ hasError }) => (hasError ? "#bd0000" : "transparent")};
+    border: 0;
 
     width: 11.16rem;
 
