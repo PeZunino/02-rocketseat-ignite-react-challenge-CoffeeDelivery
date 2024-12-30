@@ -4,7 +4,7 @@ import { Timer, MapPin, CurrencyDollar } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
 import { useOrderDetails } from "../../hooks/useOrderDetails";
 export function Success() {
-  const theme = useTheme();
+  const { colors } = useTheme();
   const { orderDetails } = useOrderDetails();
   return (
     <Content>
@@ -16,8 +16,8 @@ export function Success() {
           <Item>
             <MapPin
               weight="fill"
-              color={theme["white-200"]}
-              style={{ background: theme["purple"] }}
+              color={colors.background}
+              style={{ background: colors.purple }}
               size={32}
             />
             <div>
@@ -35,8 +35,8 @@ export function Success() {
           <Item>
             <Timer
               weight="fill"
-              color={theme["white-200"]}
-              style={{ background: theme["yellow"] }}
+              color={colors.background}
+              style={{ background: colors.yellow }}
               size={32}
             />
             <div>
@@ -46,8 +46,8 @@ export function Success() {
           </Item>
           <Item>
             <CurrencyDollar
-              color={theme["white-200"]}
-              style={{ background: theme["yellow-dark"] }}
+              color={colors.background}
+              style={{ background: colors["yellow-dark"] }}
               size={32}
             />
             <div>

@@ -2,9 +2,9 @@ import { CheckFat, ShoppingCartSimple } from "@phosphor-icons/react";
 import { CardFooter, CardContainer, Tag, AddToCartButton } from "./styles";
 import { useTheme } from "styled-components";
 import { useState } from "react";
-import { coffees } from "../../../data.json";
-import { useCart } from "../../hooks/useCart";
-import { IncreaseDecreaseAmountButton } from "../IncreaseDecreaseAmountButton";
+import { coffees } from "../../../../../data.json";
+import { useCart } from "../../../../hooks/useCart";
+import { IncreaseDecreaseAmountButton } from "../../../../components/IncreaseDecreaseAmountButton";
 export type ICoffee = (typeof coffees)[0];
 
 interface CoffeeCardProps {

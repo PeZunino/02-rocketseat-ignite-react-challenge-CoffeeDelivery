@@ -11,7 +11,7 @@ import heroImage from "../../assets/hero-img.svg";
 import { Coffee, Package, ShoppingCart, Timer } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
 import { coffees } from "../../../data.json";
-import { CoffeeCard } from "../../components/CoffeeCard/index.tsx";
+import { CoffeeCard } from "./components/CoffeeCard/index.tsx";
 
 export function Home() {
   const { colors } = useTheme();

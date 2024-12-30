@@ -3,7 +3,7 @@ import {
   LocationContainer,
   CartButtonContainer,
 } from "./styles";
-import coffeeDeliveryLogo from "../../assets/logo.svg";
+import coffeeDeliveryLogo from "../../assets/navbar-logo.svg";
 import { MapPin, ShoppingCart } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
 import { useCart } from "../../hooks/useCart";

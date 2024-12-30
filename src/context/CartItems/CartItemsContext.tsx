@@ -1,4 +1,4 @@
-import { ICoffee } from "../../components/CoffeeCard";
+import { ICoffee } from "../../pages/Home/components/CoffeeCard";
 import { createContext } from "react";
 
 export interface ICartItem {

@@ -10,20 +10,18 @@ export const Content = styled.main`
   > div {
     width: 32.875rem;
 
-    > p:first-of-type {
-      color: ${(props) => props.theme["yellow-dark"]};
+    > p:nth-child(1) {
+      color: ${({ theme }) => theme.colors["yellow-dark"]};
 
-      font-family: "Baloo 2", serif;
-      font-weight: 800;
-      font-size: 2rem;
+      ${({ theme }) => theme.fonts.titleL};
     }
 
-    > p:last-of-type {
+    > p:nth-child(2) {
       margin-bottom: 2.5rem;
 
-      color: ${(props) => props.theme["gray-400"]};
+      color: ${({ theme }) => theme.colors["base-subtitle"]};
 
-      font-size: 1.25rem;
+      ${({ theme }) => theme.fonts.textL};
     }
   }
   section {
@@ -55,7 +53,9 @@ export const Item = styled.div`
 
   div {
     flex: 1;
-    color: ${(props) => props.theme["gray-300"]};
+
+    color: ${({ theme }) => theme.colors["base-text"]};
+
     span {
       font-weight: bold;
     }
