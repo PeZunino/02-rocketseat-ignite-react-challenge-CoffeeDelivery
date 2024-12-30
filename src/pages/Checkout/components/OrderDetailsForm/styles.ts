@@ -86,7 +86,8 @@ export const InputContainer = styled.label<InputContainerProps>`
     padding: 0.75rem;
     border-width: 1px;
     border-style: solid;
-    border-color: ${({ hasError }) => (hasError ? "#bd0000" : "transparent")};
+    border-color: ${({ hasError, theme }) =>
+      hasError ? theme.colors.red : "transparent"};
     border-radius: 4px;
 
     color: ${({ theme }) => theme.colors["base-text"]};
@@ -98,13 +99,29 @@ export const InputContainer = styled.label<InputContainerProps>`
       margin-right: 0.75rem;
     }
   }
+
+  :focus {
+    border: 1px solid ${({ theme }) => theme.colors["yellow-dark"]};
+  }
+
+  input:-webkit-autofill {
+    -webkit-text-fill-color: ${({ theme }) =>
+      theme.colors["base-text"]} !important;
+  }
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.colors["base-input"]}
+      inset !important;
+  }
 `;
 
 export const ErrorMessage = styled.span`
   position: absolute;
   bottom: -15px;
   left: 5px;
-  color: #bd0000;
+  color: ${({ theme }) => theme.colors.red};
 
   ${({ theme }) => theme.fonts.textXS};
 `;

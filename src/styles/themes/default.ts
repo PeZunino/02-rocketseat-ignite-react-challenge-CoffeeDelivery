@@ -2,6 +2,8 @@ import { css } from "styled-components";
 
 export const defaultTheme = {
   colors: {
+    red: "#bd0000",
+
     "yellow-light": "#F1E9C9",
     yellow: "#DBAC2C",
     "yellow-dark": "#C47F17",

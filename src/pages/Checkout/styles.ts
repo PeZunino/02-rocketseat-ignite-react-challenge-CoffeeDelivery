@@ -21,8 +21,8 @@ export const ContentContainer = styled.div`
 `;
 
 export const OrderResume = styled.div`
+  margin-bottom: 11rem;
   padding: 2.5rem;
-  height: 31.125rem;
 
   border-radius: 6px 44px;
 
@@ -33,7 +33,7 @@ export const OrderResume = styled.div`
     justify-content: space-between;
   }
   > p + p {
-    margin-top: 0.25rem;
+    margin-top: 0.75rem;
   }
   > p:nth-of-type(1),
   p:nth-of-type(2) {
