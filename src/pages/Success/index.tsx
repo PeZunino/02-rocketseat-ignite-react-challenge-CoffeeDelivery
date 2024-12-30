@@ -3,9 +3,16 @@ import deliveryIllustration from "../../assets/delivery-illustration.svg";
 import { Timer, MapPin, CurrencyDollar } from "@phosphor-icons/react";
 import { useTheme } from "styled-components";
 import { useOrderDetails } from "../../hooks/useOrderDetails";
+
+enum PaymentType {
+  "credit" = "Cartão de Crédito",
+  "debit" = "Cartão de Débito",
+  "money" = "Dinheiro",
+}
 export function Success() {
   const { colors } = useTheme();
   const { orderDetails } = useOrderDetails();
+
   return (
     <Content>
       <div>
@@ -52,7 +59,11 @@ export function Success() {
             />
             <div>
               <p>Pagamento na entrega</p>
-              <span>Cartão de Crédito</span>
+              <span>
+                {orderDetails?.paymentType
+                  ? PaymentType[orderDetails.paymentType]
+                  : null}
+              </span>
             </div>
           </Item>
         </section>

@@ -6,7 +6,9 @@ interface OrderDetailsProviderProps {
   children: ReactNode;
 }
 export function OrderDetailsProvider({ children }: OrderDetailsProviderProps) {
-  const [orderDetails, setOrderDetails] = useState<OrderComplementFormData>();
+  const [orderDetails, setOrderDetails] = useState<OrderComplementFormData>(
+    {} as OrderComplementFormData
+  );
 
   function updateOrderDetails(orderDetails: OrderComplementFormData) {
     setOrderDetails(orderDetails);

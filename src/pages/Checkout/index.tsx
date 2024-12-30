@@ -35,7 +35,7 @@ export function Checkout() {
         <h3>Cafés selecionados</h3>
         <OrderResume>
           {cartItems.map(({ coffee, amount }) => (
-            <CartItem>
+            <CartItem key={coffee.id}>
               <img src={coffee.image} />
               <div>
                 <p>{coffee.title}</p>

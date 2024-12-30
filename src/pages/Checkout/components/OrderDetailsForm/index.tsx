@@ -209,6 +209,7 @@ export function OrderDetailsForm() {
             <Bank size={16} color={colors.purple} />
             <span>CARTÃO DE DÉBITO</span>
           </label>
+
           <input
             type="radio"
             id="money"
@@ -219,6 +220,7 @@ export function OrderDetailsForm() {
             <Money size={16} color={colors.purple} />
             <span>DINHEIRO</span>
           </label>
+
           {paymentType?.message ? (
             <ErrorMessage>{paymentType?.message}</ErrorMessage>
           ) : null}

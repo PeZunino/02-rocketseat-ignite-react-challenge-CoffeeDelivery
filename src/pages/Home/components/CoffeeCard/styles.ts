@@ -79,7 +79,7 @@ export const CardFooter = styled.div`
 `;
 
 interface AddToCartButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  isChecked?: boolean;
+  $isChecked?: boolean;
 }
 export const AddToCartButton = styled.button<AddToCartButtonProps>`
   line-height: 0;
@@ -96,13 +96,13 @@ export const AddToCartButton = styled.button<AddToCartButtonProps>`
 
   #cart {
     background-color: ${({ theme }) => theme.colors.purple};
-    opacity: ${({ isChecked }) => (isChecked ? 0 : 1)};
+    opacity: ${({ $isChecked }) => ($isChecked ? 0 : 1)};
   }
   &:hover #cart {
     background-color: ${({ theme }) => theme.colors["purple-dark"]};
   }
   #check {
-    opacity: ${({ isChecked }) => (isChecked ? 1 : 0)};
+    opacity: ${({ $isChecked }) => ($isChecked ? 1 : 0)};
     background-color: ${({ theme }) => theme.colors.yellow};
   }
   &:hover #check {

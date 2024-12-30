@@ -63,7 +63,7 @@ export function CoffeeCard({ coffee }: CoffeeCardProps) {
 
         <AddToCartButton
           onClick={handleConfirmItem}
-          isChecked={checkVisibility}
+          $isChecked={checkVisibility}
         >
           <CheckFat weight="fill" size={38} color={colors.white} id="check" />
 
