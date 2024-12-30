@@ -60,7 +60,7 @@ export type OrderComplementFormData = zod.infer<
 export function OrderDetailsForm() {
   const { colors } = useTheme();
   const navigate = useNavigate();
-  const { clearCart } = useCart();
+  const { cleanCart } = useCart();
   const { updateOrderDetails } = useOrderDetails();
 
   const { register, handleSubmit, formState } =
@@ -74,7 +74,7 @@ export function OrderDetailsForm() {
       },
     });
   function handleConfirmOrder(event: OrderComplementFormData) {
-    clearCart();
+    cleanCart();
     updateOrderDetails(event);
     navigate("/success");
   }
