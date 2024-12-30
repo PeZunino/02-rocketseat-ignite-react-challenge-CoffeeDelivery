@@ -187,8 +187,7 @@ export function OrderDetailsForm() {
             value="credit"
             {...register("paymentType")}
           />
-
-          <label>
+          <label htmlFor="credit">
             <CreditCard size={16} color={colors.purple} />
             <span>CARTÃO DE CRÉDITO</span>
           </label>
@@ -199,7 +198,7 @@ export function OrderDetailsForm() {
             value="debit"
             {...register("paymentType")}
           />
-          <label>
+          <label htmlFor="debit">
             <Bank size={16} color={colors.purple} />
             <span>CARTÃO DE DÉBITO</span>
           </label>
@@ -209,7 +208,7 @@ export function OrderDetailsForm() {
             value="money"
             {...register("paymentType")}
           />
-          <label>
+          <label htmlFor="money">
             <Money size={16} color={colors.purple} />
             <span>DINHEIRO</span>
           </label>
