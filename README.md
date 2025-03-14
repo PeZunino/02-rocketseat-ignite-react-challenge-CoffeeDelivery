@@ -35,12 +35,12 @@ An application to manage a shopping cart for a fictional coffee shop.
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/PeZunino/Ignite-CoffeeDelivery.git
+   git clone https://github.com/PeZunino/Ignite-React-Module2-CoffeeDelivery.git
    ```
 3. Navigate into the project directory:
 
    ```bash
-   cd Ignite-CoffeeDelivery
+   cd Ignite-React-Module2-CoffeeDelivery
    ```
 4. Install dependencies:
 
