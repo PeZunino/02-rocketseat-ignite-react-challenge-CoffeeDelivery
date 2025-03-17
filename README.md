@@ -1,4 +1,4 @@
-# Ignite-CoffeeDelivery
+# CoffeeDelivery
 
 ![Completed](https://img.shields.io/badge/status-completed-brightgreen)
 
@@ -14,8 +14,9 @@
 ![2024-12-3018-02-27-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/e5b0b397-aabe-4b4c-9661-8b90a36df0bb)
 
 ## 📜 Description
+A single-page application (SPA) to manage a shopping cart for a fictional coffee shop.
 
-An application to manage a shopping cart for a fictional coffee shop.
+It utilizes React hooks such as Context API, useEffect, and useReducer for state management and side effects.
 
 ## ⚙️ Features
 
